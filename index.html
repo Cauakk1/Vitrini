@@ -143,7 +143,7 @@ em{font-style:italic;color:var(--terra)}
 .banner .g{position:absolute;left:0;right:0;bottom:0;height:120px;background:#C5D6B8}
 .banner .l{position:absolute;left:30%;right:0;bottom:0;height:80px;background:#CDBFE6;transform:scaleY(-1)}
 .banner .btn{position:absolute;right:16px;top:16px;background:var(--card);z-index:2}
-.identity{display:flex;gap:24px;align-items:flex-end;margin-top:-64px;padding:0 32px;position:relative}
+.identity{display:flex;gap:24px;align-items:flex-end;margin-top:-64px;padding:0 32px;position:relative;flex-wrap:wrap}
 .big-avatar{flex:none;width:112px;height:136px;border:5px solid var(--paper);outline:1px solid var(--edge);display:flex;align-items:flex-end;justify-content:center;padding-bottom:16px;font:500 34px Fraunces,serif}
 .identity .who{flex:1;padding-bottom:8px}
 .identity h1{font-size:42px}
@@ -317,7 +317,7 @@ select.in{padding-right:10px}
 .in[aria-invalid="true"]{border-color:var(--terra);box-shadow:0 0 0 2px rgba(108,85,163,.25)}
 .thumbs.mini{grid-template-columns:repeat(4,1fr)}.thumbs.mini:empty{display:none}
 .thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1.5px solid var(--ink)}.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.thumb button{position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink);background:var(--card);font-size:12px}
+.thumb button{position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card);font-size:12px}
 .upload.drag{background:#E0D4F1}
 .picker{display:flex;align-items:center;gap:16px}.picker .avatar{width:64px;height:64px;flex:none;border-radius:50%}.picker .ban{width:112px;height:64px;flex:none;border-radius:12px;overflow:hidden;position:relative;border:1.5px solid var(--ink)}.picker .ban .imgbox,.picker .avatar .imgbox{position:absolute;inset:0}
 @media (prefers-reduced-motion:reduce){.imgbox{animation:none}.page.enter,.tabpane.enter,.panel{animation:none}.work:hover .imgbox img,a.artist-card:hover .strip .imgbox img{transform:none}a.artist-card:hover{transform:none}}
@@ -342,7 +342,6 @@ select.in{padding-right:10px}
 <div class="creator-layout"><div class="form-stack"><div class="card form-card"><h2><em>1.</em> Seus dados</h2>
 <div><label class="lb" for="cf-name">Nome artístico</label><input class="in" id="cf-name" autocomplete="off" placeholder="Como você quer ser chamado(a)"></div>
 <div class="two"><div><label class="lb" for="cf-user">@usuário</label><input class="in" id="cf-user" autocomplete="off" placeholder="seunome"></div><div><label class="lb" for="cf-city">Cidade</label><input class="in" id="cf-city" autocomplete="off" placeholder="Ex.: Belo Horizonte, MG"></div></div>
-<div><label class="lb" for="cf-phone">Número de contato</label><input class="in" id="cf-phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="Ex.: (31) 99999-9999"></div>
 <div><label class="lb" for="cf-bio">Bio</label><textarea class="in" id="cf-bio" rows="3" maxlength="280" placeholder="Conte seu estilo em poucas linhas"></textarea></div>
 <div><p class="lb">Estilos</p><div class="filters" id="cf-cats"><button type="button" class="pill on" data-c="Anime/Mangá" aria-pressed="true">Anime/Mangá</button><button type="button" class="pill" data-c="Realismo" aria-pressed="false">Realismo</button><button type="button" class="pill" data-c="Cartoon" aria-pressed="false">Cartoon</button><button type="button" class="pill" data-c="Pixel Art" aria-pressed="false">Pixel Art</button><button type="button" class="pill" data-c="Concept Art" aria-pressed="false">Concept Art</button></div></div>
 <label class="check"><input type="checkbox" id="cf-open" checked>Comissões abertas (desmarque para “Lista de Espera”)</label></div>
@@ -473,7 +472,7 @@ return norm([a.name,a.user].concat(a.tags,a.cats).join(' ')).indexOf(q)>=0;});
 var g=$('#grid');g.innerHTML=list.map(card).join('');hydrate(g);$('#empty').hidden=list.length>0;
 if(!list.length){
   $('#empty h3').textContent=artistsLoading?'Carregando artistas...':(artistsLoadError?'Não foi possível carregar os artistas':(ARTISTS.length?'Nenhum artista encontrado':'Ainda não há artistas cadastrados'));
-  $('#empty p').textContent=artistsLoading?'Buscando os perfis salvos no banco de dados.':(artistsLoadError?'Verifique a conexão e as permissões de leitura da tabela artists no Supabase.':(ARTISTS.length?'Tente outro nome, tag ou estilo.':'Quando alguém criar e publicar uma vitrine, ela aparecerá aqui.'));
+  $('#empty p').textContent=artistsLoading?'Buscando os perfis salvos no banco de dados.':(artistsLoadError?'Verifique a conexão e as permissões de leitura da tabela artists no Supabase.':(ARTISTS.length?'Tente outro nome, tag ou estilo.':'Когда alguém criar e publicar uma vitrine, ela aparecerá aqui.'));
   $('#clear').hidden=!ARTISTS.length;
 }else{$('#clear').hidden=false;}
 $('#count').textContent=list.length?list.length+(list.length>1?' artistas':' artista')+(state.cat!=='Todos'?' em '+state.cat:''):(artistsLoading?'CARREGANDO':'');}
@@ -486,6 +485,7 @@ function renderArtist(a){cur=a;var open=a.status==='open';
 var stats=a.isNew?'<div><b>Novo</b><span>na Vritini</span></div><div><b>'+a.plans.length+'</b><span>pacotes</span></div><div><b>'+a.works.length+'</b><span>obras</span></div>':'<div><b>★ '+esc(a.rating)+'</b><span>avaliação</span></div><div><b>'+a.done+'</b><span>pedidos concluídos</span></div><div><b>'+a.days+' dias</b><span>entrega média</span></div><div><b>'+a.since+'</b><span>na plataforma desde</span></div>';
 var gal=a.works.map(function(w,i){return '<button class="work" data-work="'+i+'" aria-label="Ampliar: '+esc(w.t)+'">'+imgbox(w.src,w.t,'aspect-ratio:1/'+w.r)+'<span class="cap"><b>'+esc(w.t)+'</b><span>'+esc(w.tech)+'</span></span></button>';}).join('')||'<p class="mut">Este artista ainda não adicionou obras ao portfólio.</p>';
 var plans=a.plans.map(function(p,i){var f=a.plans.length>=3&&i===1;return '<div class="card commission'+(f?' featured':'')+'">'+(f?'<p class="hand">mais pedido</p>':'')+'<h3>'+esc(p.n)+'</h3><p class="sub">'+esc(p.d)+'</p><p class="price">'+fmt(p.p)+'</p><p class="mono">Entrega em '+esc(p.days)+'</p><ul class="inc">'+(p.inc||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><button class="btn '+(f?'p':'s')+' full" data-plan="'+i+'">Solicitar Comissão</button></div>';}).join('');
+
 $('#p-artist').innerHTML='<div class="w profile"><div class="pbanner">'+imgbox(a.banner,'Banner de '+a.name)+'<button class="btn s back" data-back>← Voltar para Explorar</button></div><div class="identity"><div class="big-avatar arch">'+imgbox(a.avatar,'Foto de '+a.name)+'</div><div class="who"><h1>'+esc(a.name)+'</h1><p class="mono mut">@'+esc(a.user)+(a.city?' · '+esc(a.city):'')+'</p></div>'+badge(a).replace('class="bd','style="font-size:14px;padding:8px 16px;margin-bottom:12px" class="bd')+'</div><p class="bio mut">'+esc(a.bio||'Este artista ainda não escreveu uma bio.')+'</p><div class="spec">'+a.tags.map(function(t){return '<span class="tag">#'+esc(t)+'</span>';}).join('')+'</div><div class="stats">'+stats+'</div><div class="tabs" role="tablist"><button class="on" role="tab" data-tab="work" aria-selected="true">Portfólio</button><button role="tab" data-tab="plans" aria-selected="false">Tabela de Comissões</button></div></div><section class="w tabpane" id="tab-work"><div class="gallery" aria-label="Portfólio de '+esc(a.name)+'">'+gal+'</div></section><section class="w commissions tabpane" id="tab-plans" hidden><div style="margin-bottom:26px"><p class="eyebrow">Encomendas</p><h2 style="font-size:36px">Tabela de <em>comissões</em></h2></div>'+(open?'':'<p class="mut plans-note">Agenda cheia no momento: novos pedidos entram na lista de espera.</p>')+'<div class="commission-grid">'+plans+'</div><p class="note">Valores base. O artista confirma orçamento e prazo ao receber o pedido.</p></section>';
 hydrate($('#p-artist'));document.title=a.name+' (@'+a.user+') — Vritini';}
 function setTab(t){$$('#p-artist [data-tab]').forEach(function(b){var on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});['work','plans'].forEach(function(k){var el=$('#tab-'+k);var on=k===t;if(on&&el.hidden){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else if(!on)el.hidden=true;});}
@@ -514,7 +514,7 @@ else{if(pages.indexOf(p)<0)p='home';show(p);document.title='Vritini — sua arte
 if(pendingScroll){var t=$('#'+pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}else if(!first)window.scrollTo(0,0);first=false;}
 addEventListener('hashchange',route);
 
-/* --- Autenticação Supabase (Cadastro / Login) --- */
+/* Autenticação Supabase */
 $('#btn-signup').addEventListener('click',function(){showM('modal-signup',this);});
 $('#btn-signin').addEventListener('click',function(){showM('modal-signin',this);});
 $('#switch-to-signin').addEventListener('click',function(e){e.preventDefault();closeM();showM('modal-signin',this);});
@@ -532,7 +532,7 @@ $('#form-signup').addEventListener('submit',async function(e){
   }
   toast('Conta criada com sucesso!');
   closeM();
-  location.hash = 'creator'; // Redireciona para o criador de perfil
+  location.hash = 'creator';
 });
 
 $('#form-signin').addEventListener('submit',async function(e){
@@ -547,7 +547,7 @@ $('#form-signin').addEventListener('submit',async function(e){
   }
   toast('Login efetuado com sucesso!');
   closeM();
-  location.hash = 'creator'; // Redireciona para o criador de perfil
+  location.hash = 'creator';
 });
 
 document.addEventListener('click',function(e){var t;
@@ -577,25 +577,23 @@ $('#wthumbs').addEventListener('click',function(e){var b=e.target.closest('[data
 var dz=$('#drop');['dragenter','dragover'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('drag');});});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('drag');});});dz.addEventListener('drop',function(e){addWorks(e.dataTransfer.files);});
 function picker(btn,inp,key,max,prev){$(btn).addEventListener('click',function(){$(inp).click();});$(inp).addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;readImg(f,max).then(function(r){if(!r)return;pend[key]=r.src;var p=$(prev);p.innerHTML='<img src="'+r.src+'" alt="">';p.classList.add('ok');});});}
 picker('#pick-av','#cf-av','avatar',400,'#av-prev');picker('#pick-bn','#cf-bn','banner',1000,'#bn-prev');
-function draftData(){return {name:$('#cf-name').value,user:$('#cf-user').value,city:$('#cf-city').value,phone:$('#cf-phone').value,bio:$('#cf-bio').value};}
+function draftData(){return {name:$('#cf-name').value,user:$('#cf-user').value,city:$('#cf-city').value,bio:$('#cf-bio').value};}
 $('#draft').addEventListener('click',function(){try{localStorage.setItem('vritini.draft',JSON.stringify(draftData()));}catch(e){}toast('Rascunho salvo neste navegador.');});
-try{var dr=JSON.parse(localStorage.getItem('vritini.draft')||'null');if(dr){$('#cf-name').value=dr.name||'';$('#cf-user').value=dr.user||'';$('#cf-city').value=dr.city||'';$('#cf-phone').value=dr.phone||'';$('#cf-bio').value=dr.bio||'';}}catch(e){}
+try{var dr=JSON.parse(localStorage.getItem('vritini.draft')||'null');if(dr){$('#cf-name').value=dr.name||'';$('#cf-user').value=dr.user||'';$('#cf-city').value=dr.city||'';$('#cf-bio').value=dr.bio||'';}}catch(e){}
 function bad(el,msg){el.setAttribute('aria-invalid','true');el.focus();toast(msg);}
 ['cf-name','cf-user'].forEach(function(id){$('#'+id).addEventListener('input',function(e){e.target.removeAttribute('aria-invalid');});});
 $('#cf').addEventListener('submit', async function(e){e.preventDefault();
 var name=$('#cf-name').value.trim();if(!name)return bad($('#cf-name'),'Informe seu nome artístico.');
-var phone=$('#cf-phone').value.trim();var phoneDigits=phone.replace(/\D/g,'');
-if(phoneDigits.length<10||phoneDigits.length>13)return bad($('#cf-phone'),'Informe um número de contato válido com DDD.');
 var user=slug($('#cf-user').value||name)||'artista';var base=user,n=2;while($$('#grid').length&&ARTISTS.some(function(a){return a.user===user;}))user=base+(n++);
 var cats=$$('#cf-cats .on').map(function(b){return b.dataset.c;});if(!cats.length)return toast('Escolha ao menos um estilo.');
 var plans=$$('#plans .price-row').map(function(r){var p=parseInt($('.pp',r).value.replace(/\D/g,''),10);return {n:$('.pn',r).value.trim(),p:p,days:$('.pd',r).value.trim()};}).filter(function(p){return p.n&&p.p>0;}).map(function(p){return {n:p.n,d:'Pacote definido pelo artista.',p:p.p,days:/dia/.test(p.days)?p.days:(p.days||'a combinar')+(p.days?' dias':''),inc:['Arte final em alta','Revisões combinadas com o artista']};});
 if(!plans.length)return bad($('#plans .pp'),'Adicione ao menos um pacote com nome e preço.');
-var id=user+'-'+Date.now().toString(36);var wk=pend.works.length?pend.works.map(function(w){return {t:w.t||'Obra',d:'Arte enviada por '+name+'.',tech:'Portfólio · '+new Date().getFullYear(),r:w.r,src:w.src,full:w.src};}):[1,2,3,4,5,6].map(function(i){return {t:'Obra de exemplo '+i,d:'Imagem de exemplo. Envie suas artes na aba Criار Meu Perfil.',tech:'Exemplo · '+new Date().getFullYear(),r:[1.25,1,.75,1.25,1,.75][i-1],src:IMG(id+'-'+i,640,Math.round(640*[1.25,1,.75,1.25,1,.75][i-1])),full:IMG(id+'-'+i,1400,Math.round(1400*[1.25,1,.75,1.25,1,.75][i-1]))};});
-var art={id:id,isNew:true,name:name,user:user,city:$('#cf-city').value.trim(),phone:phone,cats:cats,tags:cats.map(function(c){return norm(c).replace(/[^a-z ]/g,'');}).concat(['novo']),bio:$('#cf-bio').value.trim(),status:$('#cf-open').checked?'open':'wait',since:new Date().getFullYear(),done:0,rating:'—',days:0,avatar:pend.avatar||IMG(id+'-avatar',320,320),banner:pend.banner||IMG(id+'-banner',1400,420),works:wk,plans:plans};
+var id=user+'-'+Date.now().toString(36);var wk=pend.works.length?pend.works.map(function(w){return {t:w.t||'Obra',d:'Arte enviada por '+name+'.',tech:'Portfólio · '+new Date().getFullYear(),r:w.r,src:w.src,full:w.src};}):[1,2,3,4,5,6].map(function(i){return {t:'Obra de exemplo '+i,d:'Imagem de exemplo. Envie suas artes na aba Criar Meu Perfil.',tech:'Exemplo · '+new Date().getFullYear(),r:[1.25,1,.75,1.25,1,.75][i-1],src:IMG(id+'-'+i,640,Math.round(640*[1.25,1,.75,1.25,1,.75][i-1])),full:IMG(id+'-'+i,1400,Math.round(1400*[1.25,1,.75,1.25,1,.75][i-1]))};});
+var art={id:id,isNew:true,name:name,user:user,city:$('#cf-city').value.trim(),cats:cats,tags:cats.map(function(c){return norm(c).replace(/[^a-z ]/g,'');}).concat(['novo']),bio:$('#cf-bio').value.trim(),status:$('#cf-open').checked?'open':'wait',since:new Date().getFullYear(),done:0,rating:'—',days:0,avatar:pend.avatar||IMG(id+'-avatar',320,320),banner:pend.banner||IMG(id+'-banner',1400,420),works:wk,plans:plans};
 
 toast('Publicando vitrine...');
 var { error } = await db.from('artists').insert([{
-  id: art.id, name: art.name, user: art.user, city: art.city, phone: art.phone,
+  id: art.id, name: art.name, user: art.user, city: art.city,
   bio: art.bio, status: art.status, cats: art.cats, tags: art.tags,
   works: art.works, plans: art.plans, avatar: art.avatar, banner: art.banner
 }]);
