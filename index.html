@@ -328,7 +328,7 @@ select.in{padding-right:10px}
 </head>
 <body>
 <div class="app-shell">
-<header class="site-header"><div class="w"><button class="brand" data-go="home" aria-label="Ir para a home"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg><span class="f">Vritini</span></button><button class="menu-toggle" id="mt" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="main-nav" id="nav"><button data-go="home">Explorar</button><button data-go="about">O Que Somos</button><button data-go="creator">Criar Meu Perfil</button><div class="nav-actions"><button class="btn s">Entrar</button><button class="btn p">Cadastrar</button></div></nav></div><div class="awn-stripe" aria-hidden="true"></div><div class="awn" aria-hidden="true"></div></header>
+<header class="site-header"><div class="w"><button class="brand" data-go="home" aria-label="Ir para a home"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg><span class="f">Vritini</span></button><button class="menu-toggle" id="mt" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="main-nav" id="nav"><button data-go="home">Explorar</button><button data-go="about">O Que Somos</button><button data-go="creator">Criar Meu Perfil</button><div class="nav-actions"><button class="btn s" id="btn-signin">Entrar</button><button class="btn p" id="btn-signup">Cadastrar</button></div></nav></div><div class="awn-stripe" aria-hidden="true"></div><div class="awn" aria-hidden="true"></div></header>
 <main class="page" id="p-home"><div class="hero-wrap"><div class="tB"></div><div class="tA"></div><section class="w hero"><div><p class="eyebrow">Vitrine de artistas · comissões</p><h1>Sua arte na <em>vitrine</em> certa.</h1><p class="hero-text">Foque em criar, nós trazemos os clientes até você. Artistas montam portfólio e tabela de preços; clientes encontram o estilo exato e encomendam com facilidade e segurança.</p><div class="button-row"><button class="btn p lg" data-go="creator">Sou Artista (Criar Vitrine)</button><button class="btn s lg" data-scroll="explorar">Quero Encomendar uma Arte</button></div></div><div class="hero-art" aria-hidden="true"><div class="scene t1 arch a1" style="--sun:#FBF7F0;--hill:#C5D6B8;"><i class="ht"></i></div><div class="scene t5 arch a2" style="--sun:#FBF7F0;--hill:#CDBFE6;"><i class="ht"></i></div><div class="scene t0 arch a3" style="--sun:#4A3F5C;--hill:#C5D6B8;"><i class="ht"></i></div><div class="sunc"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="VITRINE DE ARTE"><path id="stamp-hero" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:16s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-hero" textLength="272" lengthAdjust="spacing">VITRINE DE ARTE · VITRINE DE ARTE ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg></div><p class="hand">cada traço<br>tem seu lugar ↗</p></div></section></div>
 <section class="w explore" id="explorar"><div class="explore-head"><div><p class="eyebrow">Vitrine aberta</p><h2>Explorar <em>Artistas</em></h2></div><p class="mut">Descubra talentos independentes e encontre o traço ideal para o seu projeto.</p></div>
 <div class="card search-card"><label class="search-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="q" type="search" autocomplete="off" placeholder="Busque por nome, @usuário ou tag (ex.: chibi, mascote, rpg)" aria-label="Buscar artistas por nome ou tag"></label>
@@ -351,6 +351,31 @@ select.in{padding-right:10px}
 <div class="card form-card"><h2><em>4.</em> Aparência</h2><div class="picker"><div class="avatar"><span class="imgbox" id="av-prev"></span></div><div><p class="lb" style="margin:0">Foto de perfil</p><button type="button" class="btn s" id="pick-av">Escolher foto</button></div><input type="file" id="cf-av" accept="image/*" hidden></div><div class="picker"><div class="ban"><span class="imgbox" id="bn-prev"></span></div><div><p class="lb" style="margin:0">Banner de capa</p><button type="button" class="btn s" id="pick-bn">Escolher banner</button></div><input type="file" id="cf-bn" accept="image/*" hidden></div></div></div></div></form></main><main class="page" id="p-artist" hidden></main>
 <footer class="site-footer tT"><div class="w"><span class="f">Vritini</span><p class="mono">Cada traço tem seu lugar.</p></div></footer>
 </div>
+
+<!-- Modal de Cadastro -->
+<div class="modal" id="modal-signup" hidden role="dialog" aria-modal="true" aria-label="Criar conta"><div class="bk" data-close></div><div class="panel rqp"><button class="x" data-close aria-label="Fechar">✕</button>
+<form id="form-signup">
+  <p class="eyebrow">Novo acesso</p>
+  <h2>Criar <em>conta</em></h2>
+  <div><label class="lb" for="su-email">E-mail</label><input class="in" id="su-email" type="email" required autocomplete="email" placeholder="seu@email.com"></div>
+  <div><label class="lb" for="su-pass">Senha</label><input class="in" id="su-pass" type="password" required placeholder="Mínimo de 6 caracteres"></div>
+  <button class="btn p full" type="submit" style="margin-top:8px">Cadastrar e Criar Perfil</button>
+  <p class="note" style="text-align:center; margin-top:12px">Já tem uma conta? <a href="#" id="switch-to-signin" style="color:var(--terra); font-weight:600;">Entrar</a></p>
+</form>
+</div></div>
+
+<!-- Modal de Login -->
+<div class="modal" id="modal-signin" hidden role="dialog" aria-modal="true" aria-label="Entrar"><div class="bk" data-close></div><div class="panel rqp"><button class="x" data-close aria-label="Fechar">✕</button>
+<form id="form-signin">
+  <p class="eyebrow">Bem-vindo de volta</p>
+  <h2>Fazer <em>login</em></h2>
+  <div><label class="lb" for="si-email">E-mail</label><input class="in" id="si-email" type="email" required autocomplete="email" placeholder="seu@email.com"></div>
+  <div><label class="lb" for="si-pass">Senha</label><input class="in" id="si-pass" type="password" required placeholder="Sua senha"></div>
+  <button class="btn p full" type="submit" style="margin-top:8px">Entrar</button>
+  <p class="note" style="text-align:center; margin-top:12px">Não tem conta? <a href="#" id="switch-to-signup" style="color:var(--terra); font-weight:600;">Cadastre-se</a></p>
+</form>
+</div></div>
+
 <div class="modal" id="lb" hidden role="dialog" aria-modal="true" aria-label="Obra ampliada"><div class="bk" data-close></div><div class="panel lbp"></div></div>
 <div class="modal" id="rq" hidden role="dialog" aria-modal="true" aria-labelledby="rq-title"><div class="bk" data-close></div><div class="panel rqp"><button class="x" data-close aria-label="Fechar">✕</button>
 <form id="rq-f"><p class="eyebrow">Solicitar comissão</p><h2 id="rq-title"></h2>
@@ -369,11 +394,9 @@ var $=function(s,r){return (r||document).querySelector(s);},$$=function(s,r){ret
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
 var fmt=function(n){return 'R$ '+Number(n).toLocaleString('pt-BR');};
 var norm=function(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();};
-/* ---- IMAGENS ---- */
 var IMG=function(seed,w,h){return 'https://picsum.photos/seed/'+encodeURIComponent(seed)+'/'+w+'/'+h;};
 var CATS=['Anime/Mangá','Realismo','Cartoon','Pixel Art','Concept Art'];
 
-/* Somente perfis publicados no Supabase são exibidos. */
 var ARTISTS=[];
 var artistsLoading=true;
 var artistsLoadError=false;
@@ -410,7 +433,7 @@ function normalizeArtist(p){
   };
 }
 
-/* ---- Conexão com o Supabase ---- */
+/* Conexão com o Supabase */
 var SUPABASE_URL = 'https://zeodpizpejkzuonqxdr.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_qF4a6BnduP8OSGV8r-aTzw_8ZQbr02T';
 var db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -462,4 +485,133 @@ var cur=null;
 function renderArtist(a){cur=a;var open=a.status==='open';
 var stats=a.isNew?'<div><b>Novo</b><span>na Vritini</span></div><div><b>'+a.plans.length+'</b><span>pacotes</span></div><div><b>'+a.works.length+'</b><span>obras</span></div>':'<div><b>★ '+esc(a.rating)+'</b><span>avaliação</span></div><div><b>'+a.done+'</b><span>pedidos concluídos</span></div><div><b>'+a.days+' dias</b><span>entrega média</span></div><div><b>'+a.since+'</b><span>na plataforma desde</span></div>';
 var gal=a.works.map(function(w,i){return '<button class="work" data-work="'+i+'" aria-label="Ampliar: '+esc(w.t)+'">'+imgbox(w.src,w.t,'aspect-ratio:1/'+w.r)+'<span class="cap"><b>'+esc(w.t)+'</b><span>'+esc(w.tech)+'</span></span></button>';}).join('')||'<p class="mut">Este artista ainda não adicionou obras ao portfólio.</p>';
-var plans=a.plans.map(function(p,i){var f=a.plans.length>=3&&i===1;return '<div class="card commission'+(f?' featured':'')+'">'+(f?'<p class="hand">mais pedido</p>
+var plans=a.plans.map(function(p,i){var f=a.plans.length>=3&&i===1;return '<div class="card commission'+(f?' featured':'')+'">'+(f?'<p class="hand">mais pedido</p>':'')+'<h3>'+esc(p.n)+'</h3><p class="sub">'+esc(p.d)+'</p><p class="price">'+fmt(p.p)+'</p><p class="mono">Entrega em '+esc(p.days)+'</p><ul class="inc">'+(p.inc||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><button class="btn '+(f?'p':'s')+' full" data-plan="'+i+'">Solicitar Comissão</button></div>';}).join('');
+$('#p-artist').innerHTML='<div class="w profile"><div class="pbanner">'+imgbox(a.banner,'Banner de '+a.name)+'<button class="btn s back" data-back>← Voltar para Explorar</button></div><div class="identity"><div class="big-avatar arch">'+imgbox(a.avatar,'Foto de '+a.name)+'</div><div class="who"><h1>'+esc(a.name)+'</h1><p class="mono mut">@'+esc(a.user)+(a.city?' · '+esc(a.city):'')+'</p></div>'+badge(a).replace('class="bd','style="font-size:14px;padding:8px 16px;margin-bottom:12px" class="bd')+'</div><p class="bio mut">'+esc(a.bio||'Este artista ainda não escreveu uma bio.')+'</p><div class="spec">'+a.tags.map(function(t){return '<span class="tag">#'+esc(t)+'</span>';}).join('')+'</div><div class="stats">'+stats+'</div><div class="tabs" role="tablist"><button class="on" role="tab" data-tab="work" aria-selected="true">Portfólio</button><button role="tab" data-tab="plans" aria-selected="false">Tabela de Comissões</button></div></div><section class="w tabpane" id="tab-work"><div class="gallery" aria-label="Portfólio de '+esc(a.name)+'">'+gal+'</div></section><section class="w commissions tabpane" id="tab-plans" hidden><div style="margin-bottom:26px"><p class="eyebrow">Encomendas</p><h2 style="font-size:36px">Tabela de <em>comissões</em></h2></div>'+(open?'':'<p class="mut plans-note">Agenda cheia no momento: novos pedidos entram na lista de espera.</p>')+'<div class="commission-grid">'+plans+'</div><p class="note">Valores base. O artista confirma orçamento e prazo ao receber o pedido.</p></section>';
+hydrate($('#p-artist'));document.title=a.name+' (@'+a.user+') — Vritini';}
+function setTab(t){$$('#p-artist [data-tab]').forEach(function(b){var on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});['work','plans'].forEach(function(k){var el=$('#tab-'+k);var on=k===t;if(on&&el.hidden){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else if(!on)el.hidden=true;});}
+
+var openM=null,lastF=null,lb={i:0},rq={idx:0};
+function showM(id,opener){var m=$('#'+id);m.hidden=false;document.body.style.overflow='hidden';openM=m;lastF=opener||document.activeElement;var f=m.querySelector('[data-focus]')||m.querySelector('.x');if(f)f.focus();}
+function closeM(){if(!openM)return;openM.hidden=true;openM=null;document.body.style.overflow='';if(lastF&&lastF.focus&&document.contains(lastF))lastF.focus();}
+function drawLB(){var a=cur,i=lb.i,w=a.works[i];var p=$('#lb .panel');
+p.innerHTML='<button class="x" data-close aria-label="Fechar">✕</button><div class="lb-img">'+imgbox(w.full||w.src,w.t)+'<button class="lb-nav prev" data-nav="-1" aria-label="Obra anterior">←</button><button class="lb-nav next" data-nav="1" aria-label="Próxima obra">→</button></div><div class="lb-info"><p class="eyebrow">Obra '+(i+1)+' de '+a.works.length+'</p><h2>'+esc(w.t)+'</h2><p class="mut">'+esc(w.d)+'</p><p class="mono mut">'+esc(w.tech)+'</p><div class="lb-artist"><div class="avatar">'+imgbox(a.avatar,'')+'</div><div><b class="f" style="font-size:18px">'+esc(a.name)+'</b><p class="mono mut">@'+esc(a.user)+'</p></div></div><button class="btn p full" data-goplans>Ver tabela de comissões</button></div>';hydrate(p);}
+function sumRQ(){var p=cur.plans[+$('#rq-plan').value];$('#rq-sum').textContent=fmt(p.p)+' · entrega em '+p.days;}
+function openRQ(idx,opener){rq.idx=idx;var a=cur;$('#rq-f').reset();$('#rq-f').hidden=false;$('#rq-done').hidden=true;$('#rq-title').innerHTML='Pedido para <em>'+esc(a.name)+'</em>';$('#rq-artist').value=a.name+' (@'+a.user+')';
+$('#rq-plan').innerHTML=a.plans.map(function(p,i){return '<option value="'+i+'">'+esc(p.n)+' — '+fmt(p.p)+'</option>';}).join('');$('#rq-plan').value=idx;sumRQ();showM('rq',opener);}
+$('#rq-plan').addEventListener('change',sumRQ);
+$('#rq-f').addEventListener('submit',function(e){e.preventDefault();if(!e.target.checkValidity()){e.target.reportValidity();return;}var p=cur.plans[+$('#rq-plan').value];
+$('#rq-msg').textContent='Seu pedido de “'+p.n+'” ('+fmt(p.p)+') foi enviado para '+cur.name+'. A resposta chega em '+$('#rq-mail').value+'.';$('#rq-f').hidden=true;$('#rq-done').hidden=false;toast('Pedido enviado para @'+cur.user);});
+document.addEventListener('keydown',function(e){if(!openM)return;if(e.key==='Escape')closeM();
+else if(openM.id==='lb'&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){lb.i=(lb.i+(e.key==='ArrowRight'?1:-1)+cur.works.length)%cur.works.length;drawLB();}
+else if(e.key==='Tab'){var f=$$('button,input,select,textarea,a[href]',openM).filter(function(x){return !x.disabled&&x.offsetParent!==null;});if(!f.length)return;var first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+
+var pages=['home','about','creator','artist'],pendingScroll=null,first=true;
+function show(p){pages.forEach(function(x){var el=$('#p-'+x),on=x===p;if(on){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else el.hidden=true;});
+$$('#nav>button').forEach(function(b){b.classList.toggle('on',b.dataset.go===(p==='artist'?'home':p));});$('#nav').classList.remove('open');}
+function route(){closeM();var h=location.hash.replace(/^#\/?/,'')||'home',parts=h.split('/'),p=parts[0];
+if(p==='artist'){var a=byId(decodeURIComponent(parts[1]||''));if(!a&&artistsLoading){show('home');return;}if(!a){location.replace('#home');return;}renderArtist(a);show('artist');setTab('work');}
+else{if(pages.indexOf(p)<0)p='home';show(p);document.title='Vritini — sua arte na vitrine certa';}
+if(pendingScroll){var t=$('#'+pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}else if(!first)window.scrollTo(0,0);first=false;}
+addEventListener('hashchange',route);
+
+/* --- Autenticação Supabase (Cadastro / Login) --- */
+$('#btn-signup').addEventListener('click',function(){showM('modal-signup',this);});
+$('#btn-signin').addEventListener('click',function(){showM('modal-signin',this);});
+$('#switch-to-signin').addEventListener('click',function(e){e.preventDefault();closeM();showM('modal-signin',this);});
+$('#switch-to-signup').addEventListener('click',function(e){e.preventDefault();closeM();showM('modal-signup',this);});
+
+$('#form-signup').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var email=$('#su-email').value.trim();
+  var password=$('#su-pass').value.trim();
+  toast('Criando conta...');
+  var { data, error } = await db.auth.signUp({ email: email, password: password });
+  if(error){
+    toast('Erro ao criar conta: '+error.message);
+    return;
+  }
+  toast('Conta criada com sucesso!');
+  closeM();
+  location.hash = 'creator'; // Redireciona para o criador de perfil
+});
+
+$('#form-signin').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var email=$('#si-email').value.trim();
+  var password=$('#si-pass').value.trim();
+  toast('Entrando...');
+  var { data, error } = await db.auth.signInWithPassword({ email: email, password: password });
+  if(error){
+    toast('Erro ao entrar: '+error.message);
+    return;
+  }
+  toast('Login efetuado com sucesso!');
+  closeM();
+  location.hash = 'creator'; // Redireciona para o criador de perfil
+});
+
+document.addEventListener('click',function(e){var t;
+if(t=e.target.closest('[data-go]')){e.preventDefault();location.hash=t.dataset.go;return;}
+if(t=e.target.closest('[data-scroll]')){pendingScroll=t.dataset.scroll;if(location.hash.replace('#','')&&location.hash!=='#home'){location.hash='home';}else{var s=$('#'+pendingScroll);pendingScroll=null;s.scrollIntoView({behavior:'smooth',block:'start'});}return;}
+if(e.target.closest('[data-back]')){pendingScroll='explorar';location.hash='home';return;}
+if(t=e.target.closest('[data-tab]')){setTab(t.dataset.tab);return;}
+if(t=e.target.closest('[data-work]')){lb.i=+t.dataset.work;drawLB();showM('lb',t);return;}
+if(t=e.target.closest('[data-nav]')){lb.i=(lb.i+ +t.dataset.nav+cur.works.length)%cur.works.length;drawLB();return;}
+if(e.target.closest('[data-goplans]')){closeM();setTab('plans');$('#tab-plans').scrollIntoView({behavior:'smooth',block:'start'});return;}
+if(t=e.target.closest('[data-plan]')){openRQ(+t.dataset.plan,t);return;}
+if(e.target.closest('[data-close]')){closeM();return;}});
+$('#mt').addEventListener('click',function(){$('#nav').classList.toggle('open');});
+
+var pend={works:[],avatar:null,banner:null};
+var slug=function(s){return norm(s).replace(/^@/,'').replace(/[^a-z0-9._]+/g,'').slice(0,24);};
+function planRow(n,p,d){var r=document.createElement('div');r.className='price-row';r.innerHTML='<div><label class="lb">Tipo<input class="in pn" style="margin-top:8px" value="'+esc(n||'')+'" placeholder="Ex.: Meio Corpo"></label></div><div><label class="lb">Preço (R$)<input class="in pp" style="margin-top:8px" inputmode="numeric" value="'+esc(p||'')+'" placeholder="0"></label></div><div><label class="lb">Prazo (dias)<input class="in pd" style="margin-top:8px" value="'+esc(d||'')+'" placeholder="5 a 8"></label></div><button type="button" class="rm" aria-label="Remover pacote">✕</button>';$('#plans').appendChild(r);}
+['Ícone / Avatar','Meio Corpo','Corpo Inteiro'].forEach(function(n){planRow(n,'','');});
+$('#add-plan').addEventListener('click',function(){planRow('','','');});
+$('#plans').addEventListener('click',function(e){var b=e.target.closest('.rm');if(b&&$$('#plans .price-row').length>1)b.parentNode.remove();});
+$('#cf-cats').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;var on=!b.classList.contains('on');b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});
+function readImg(file,max){return new Promise(function(res){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res({src:c.toDataURL('image/jpeg',.7),r:c.height/c.width,t:file.name.replace(/\.[^.]+$/,'')});};im.onerror=function(){res(null);};im.src=fr.result;};fr.onerror=function(){res(null);};fr.readAsDataURL(file);});}
+function drawThumbs(){$('#wthumbs').innerHTML=pend.works.map(function(w,i){return '<div class="thumb"><img src="'+w.src+'" alt="'+esc(w.t)+'"><button type="button" data-rmw="'+i+'" aria-label="Remover imagem">✕</button></div>';}).join('');$('#wnote').textContent=pend.works.length?pend.works.length+' imagem(ns) selecionada(s).':'Sem imagens? Usaremos exemplos para sua vitrine não ficar vazia.';}
+function addWorks(files){Promise.all([].slice.call(files).filter(function(f){return /^image\//.test(f.type);}).slice(0,12).map(function(f){return readImg(f,800);})).then(function(r){pend.works=pend.works.concat(r.filter(Boolean)).slice(0,12);drawThumbs();});}
+$('#pick-works').addEventListener('click',function(){$('#cf-works').click();});$('#cf-works').addEventListener('change',function(e){addWorks(e.target.files);e.target.value='';});
+$('#wthumbs').addEventListener('click',function(e){var b=e.target.closest('[data-rmw]');if(b){pend.works.splice(+b.dataset.rmw,1);drawThumbs();}});
+var dz=$('#drop');['dragenter','dragover'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('drag');});});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('drag');});});dz.addEventListener('drop',function(e){addWorks(e.dataTransfer.files);});
+function picker(btn,inp,key,max,prev){$(btn).addEventListener('click',function(){$(inp).click();});$(inp).addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;readImg(f,max).then(function(r){if(!r)return;pend[key]=r.src;var p=$(prev);p.innerHTML='<img src="'+r.src+'" alt="">';p.classList.add('ok');});});}
+picker('#pick-av','#cf-av','avatar',400,'#av-prev');picker('#pick-bn','#cf-bn','banner',1000,'#bn-prev');
+function draftData(){return {name:$('#cf-name').value,user:$('#cf-user').value,city:$('#cf-city').value,phone:$('#cf-phone').value,bio:$('#cf-bio').value};}
+$('#draft').addEventListener('click',function(){try{localStorage.setItem('vritini.draft',JSON.stringify(draftData()));}catch(e){}toast('Rascunho salvo neste navegador.');});
+try{var dr=JSON.parse(localStorage.getItem('vritini.draft')||'null');if(dr){$('#cf-name').value=dr.name||'';$('#cf-user').value=dr.user||'';$('#cf-city').value=dr.city||'';$('#cf-phone').value=dr.phone||'';$('#cf-bio').value=dr.bio||'';}}catch(e){}
+function bad(el,msg){el.setAttribute('aria-invalid','true');el.focus();toast(msg);}
+['cf-name','cf-user'].forEach(function(id){$('#'+id).addEventListener('input',function(e){e.target.removeAttribute('aria-invalid');});});
+$('#cf').addEventListener('submit', async function(e){e.preventDefault();
+var name=$('#cf-name').value.trim();if(!name)return bad($('#cf-name'),'Informe seu nome artístico.');
+var phone=$('#cf-phone').value.trim();var phoneDigits=phone.replace(/\D/g,'');
+if(phoneDigits.length<10||phoneDigits.length>13)return bad($('#cf-phone'),'Informe um número de contato válido com DDD.');
+var user=slug($('#cf-user').value||name)||'artista';var base=user,n=2;while($$('#grid').length&&ARTISTS.some(function(a){return a.user===user;}))user=base+(n++);
+var cats=$$('#cf-cats .on').map(function(b){return b.dataset.c;});if(!cats.length)return toast('Escolha ao menos um estilo.');
+var plans=$$('#plans .price-row').map(function(r){var p=parseInt($('.pp',r).value.replace(/\D/g,''),10);return {n:$('.pn',r).value.trim(),p:p,days:$('.pd',r).value.trim()};}).filter(function(p){return p.n&&p.p>0;}).map(function(p){return {n:p.n,d:'Pacote definido pelo artista.',p:p.p,days:/dia/.test(p.days)?p.days:(p.days||'a combinar')+(p.days?' dias':''),inc:['Arte final em alta','Revisões combinadas com o artista']};});
+if(!plans.length)return bad($('#plans .pp'),'Adicione ao menos um pacote com nome e preço.');
+var id=user+'-'+Date.now().toString(36);var wk=pend.works.length?pend.works.map(function(w){return {t:w.t||'Obra',d:'Arte enviada por '+name+'.',tech:'Portfólio · '+new Date().getFullYear(),r:w.r,src:w.src,full:w.src};}):[1,2,3,4,5,6].map(function(i){return {t:'Obra de exemplo '+i,d:'Imagem de exemplo. Envie suas artes na aba Criار Meu Perfil.',tech:'Exemplo · '+new Date().getFullYear(),r:[1.25,1,.75,1.25,1,.75][i-1],src:IMG(id+'-'+i,640,Math.round(640*[1.25,1,.75,1.25,1,.75][i-1])),full:IMG(id+'-'+i,1400,Math.round(1400*[1.25,1,.75,1.25,1,.75][i-1]))};});
+var art={id:id,isNew:true,name:name,user:user,city:$('#cf-city').value.trim(),phone:phone,cats:cats,tags:cats.map(function(c){return norm(c).replace(/[^a-z ]/g,'');}).concat(['novo']),bio:$('#cf-bio').value.trim(),status:$('#cf-open').checked?'open':'wait',since:new Date().getFullYear(),done:0,rating:'—',days:0,avatar:pend.avatar||IMG(id+'-avatar',320,320),banner:pend.banner||IMG(id+'-banner',1400,420),works:wk,plans:plans};
+
+toast('Publicando vitrine...');
+var { error } = await db.from('artists').insert([{
+  id: art.id, name: art.name, user: art.user, city: art.city, phone: art.phone,
+  bio: art.bio, status: art.status, cats: art.cats, tags: art.tags,
+  works: art.works, plans: art.plans, avatar: art.avatar, banner: art.banner
+}]);
+var saved = !error;
+if (error) {
+  console.error('Erro Supabase:', error);
+  toast('Não foi possível salvar. Verifique as colunas e as políticas da tabela artists no Supabase.');
+  return;
+}
+
+ARTISTS.unshift(normalizeArtist(art));renderGrid();
+pend={works:[],avatar:null,banner:null};drawThumbs();$('#av-prev').innerHTML='';$('#bn-prev').innerHTML='';$('#av-prev').className='imgbox';$('#bn-prev').className='imgbox';
+$('#cf').reset();$$('#cf-cats .pill').forEach(function(b,i){b.classList.toggle('on',i===0);b.setAttribute('aria-pressed',i===0);});$('#plans').innerHTML='';['Ícone / Avatar','Meio Corpo','Corpo Inteiro'].forEach(function(x){planRow(x,'','');});try{localStorage.removeItem('vritini.draft');}catch(er){}
+location.hash='artist/'+id;toast(saved?'Sua vitrine foi publicada no banco de dados!':'Erro ao salvar no banco (verifique as políticas RLS).');});
+renderGrid();route();
+})();
+</script>
+</body>
+</html>
