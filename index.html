@@ -1,14 +1,36 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vritini — sua arte na vitrine certa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = 'https://zeodpizpejkkzuonqxdr.supabase.co';
+const SUPABASE_ANON_KEY = 'COLE_AQUI_SUA_CHAVE_PUBLICA_SB_PUBLISHABLE';
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+</script>
+
 <style>
-*,::before,::after{border:0 solid}button{background:none;padding:0}svg{display:block}[hidden]{display:none!important}
+*,::before,::after{border:0 solid}
+button{background:none;padding:0}
+svg{display:block}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
 
 :root{--paper:#F5EEE3;--card:#FBF7F0;--ink:#3B3340;--plum:#4A3F5C;--mut:#6B6272;--terra:#6C55A3;--line:#E3D6C5;--edge:rgba(59,51,64,.55)}
 *{box-sizing:border-box}
