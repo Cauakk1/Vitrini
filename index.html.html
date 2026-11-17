@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vritini — sua arte na vitrine certa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,::before,::after{border:0 solid}button{background:none;padding:0}svg{display:block}[hidden]{display:none!important}
+
+:root{--paper:#F5EEE3;--card:#FBF7F0;--ink:#3B3340;--plum:#4A3F5C;--mut:#6B6272;--terra:#6C55A3;--line:#E3D6C5;--edge:rgba(59,51,64,.55)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;background:var(--paper);color:var(--ink);font:400 16px/1.6 'DM Sans',sans-serif}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.6;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .25 1.2 0 0 0 -.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+p{margin:0}
+h1,h2,h3,h4,.f{font-family:Fraunces,serif;font-weight:500;margin:0;letter-spacing:-.015em;line-height:1.1}
+em{font-style:italic;color:var(--terra)}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.app-shell{position:relative;overflow:hidden;min-height:100vh}
+.w{max-width:1160px;margin:0 auto;padding:0 40px}
+.mut{color:var(--mut)}
+.hand{font-family:Caveat,cursive;font-weight:500;color:var(--terra)}
+.mono,.eyebrow,.lb{font:500 11px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow{letter-spacing:.14em;color:var(--terra)}
+.lb{display:block;margin-bottom:8px;letter-spacing:.1em;color:var(--plum)}
+
+/* botões, pílulas, selos */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 26px;border-radius:999px;font:600 14px 'DM Sans',sans-serif;border:0;white-space:nowrap;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.p{background:var(--plum);color:var(--card)}
+.btn.s{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.o{background:#C5D6B8;color:var(--ink)}
+.btn.lg{min-height:52px}.btn.full{width:100%}
+.pill{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid #CFC1B0;background:transparent;font:500 14px 'DM Sans',sans-serif}
+.pill.on{background:#CDBFE6;border-color:var(--plum)}
+.bd{display:inline-block;padding:4px 11px;border-radius:999px;font:600 12px 'DM Sans',sans-serif}
+.bd.a{background:#D6E4CC;color:#3F5A33}.bd.c{background:#E9E0D3;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px}
+
+/* paleta pastel e cenas */
+.t1{background:linear-gradient(160deg,#CDBFE6,#EAE2F6)}.t2{background:linear-gradient(160deg,#C5D6B8,#FADFD0)}.t3{background:linear-gradient(160deg,#CDBFE6,#E0EEF3)}.t4{background:linear-gradient(160deg,#CDBFE6,#F9DFE5)}.t5{background:linear-gradient(160deg,#C5D6B8,#E2EBD9)}.t6{background:linear-gradient(160deg,#C5D6B8,#FAF1CF)}
+.scene{position:relative;overflow:hidden;border:1px solid var(--edge)}
+.scene::before{content:"";position:absolute;left:55%;top:16%;width:28%;aspect-ratio:1;border-radius:50%;background:var(--sun,#FBF7F0)}
+.scene::after{content:"";position:absolute;left:-20%;bottom:-20%;width:140%;height:45%;border-radius:50%;background:var(--hill,#C5D6B8)}
+.arch{border-radius:999px 999px 16px 16px}
+
+/* papel rasgado e toldo */
+.tA{clip-path:polygon(0 0,100% 0,100% 93%,96% 97%,91% 93%,85% 98%,78% 94%,70% 98%,63% 93%,55% 97%,47% 94%,40% 98%,32% 94%,24% 98%,16% 93%,9% 97%,4% 94%,0 97%)}
+.tB{clip-path:polygon(0 0,100% 0,100% 96%,94% 92%,88% 97%,81% 93%,74% 98%,66% 94%,58% 98%,50% 93%,42% 97%,34% 93%,27% 98%,19% 94%,11% 98%,5% 93%,0 96%)}
+.tT{clip-path:polygon(0 6%,5% 0,11% 5%,18% 1%,26% 6%,34% 1%,43% 5%,51% 0,60% 5%,68% 1%,77% 6%,85% 1%,93% 5%,100% 0,100% 100%,0 100%)}
+.awn-stripe{height:8px;background:repeating-linear-gradient(90deg,#C5D6B8 0 36px,#E4DAF2 36px 72px)}
+.awn{height:18px;background:radial-gradient(circle at 18px 0,#C5D6B8 17px,transparent 18.5px) 0 0/72px 18px repeat-x,radial-gradient(circle at 18px 0,#E4DAF2 17px,transparent 18.5px) 36px 0/72px 18px repeat-x}
+
+/* header */
+.site-header{background:var(--paper);position:relative;z-index:5}
+.site-header .w{display:flex;align-items:center;justify-content:space-between;height:84px}
+.brand{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0}
+.brand .f{font-size:28px;font-weight:600}
+.main-nav{display:flex;gap:34px;align-items:center}
+.main-nav>button{border:0;background:none;font:500 15px 'DM Sans',sans-serif;color:var(--mut);padding:10px 2px}
+.main-nav>button.on{color:var(--ink);border-bottom:1.5px solid var(--terra)}
+.nav-actions{display:flex;gap:10px}
+.menu-toggle{display:none;border:0;background:none;padding:8px}
+
+/* home */
+.hero-wrap{position:relative}
+.hero-wrap>.tB{position:absolute;inset:0 0 -26px;background:#C5D6B8}
+.hero-wrap>.tA{position:absolute;inset:0;background:#EEE5F4}
+.hero{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding-top:56px;padding-bottom:80px}
+.hero h1{font-size:66px;line-height:1.04;margin:18px 0 22px}
+.hero-text{font-size:18px;max-width:480px;color:var(--mut)}
+.button-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.hero-art{position:relative;height:490px}
+.hero-art>*{position:absolute}
+.hero-art .a1{left:0;top:110px;width:170px;height:300px;--sun:#FBF7F0;--hill:#C5D6B8}
+.hero-art .a2{left:150px;top:20px;width:190px;height:400px;--sun:#C5D6B8;--hill:#CDBFE6}
+.hero-art .a3{left:320px;top:150px;width:170px;height:280px;--sun:#C5D6B8;--hill:#C5D6B8}
+.hero-art .sunc{left:330px;top:0;width:96px;height:96px;border-radius:50%}
+.hero-art .hand{left:300px;top:430px;font-size:28px;line-height:1.3;transform:rotate(-4deg)}
+.search-panel{padding-top:72px}
+.search-card{padding:18px;display:flex;flex-direction:column;gap:14px}
+.search-box{display:flex;align-items:center;gap:10px;border:1px solid #CFC1B0;border-radius:999px;min-height:52px;padding:0 18px;background:var(--card);color:var(--mut)}
+.search-box input{border:0;outline:0;background:none;width:100%;font:400 15px 'DM Sans',sans-serif;color:var(--ink)}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.section{padding-top:48px}
+.section-heading{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;gap:16px}
+.section-heading h2{font-size:34px}
+.text-link{white-space:nowrap;border:0;background:none;font-weight:600;font-size:14px;border-bottom:1.5px solid var(--terra);padding:0;min-height:24px}
+.artist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.artist-card{padding:18px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--edge);border-radius:14px;overflow:hidden}
+.strip .scene{aspect-ratio:1;border:0}
+.strip .scene+.scene{border-left:1px solid var(--edge)}
+.artist-meta{display:flex;align-items:center;gap:12px;margin-top:18px}
+.avatar{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;font:500 15px Fraunces,serif}
+.artist-meta h3{font-size:20px}
+.artist-meta .mono{font-size:10px}
+.artist-card .bd{margin-top:12px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed #CFC1B0;font-size:14px;color:var(--mut)}
+.card-bottom b{font:500 22px Fraunces,serif;color:var(--ink)}
+.empty{grid-column:1/-1;text-align:center;padding:40px 0}
+
+/* footer */
+.site-footer{background:var(--plum);color:#E9E0D3;margin-top:88px;padding-top:44px}
+.site-footer .w{display:flex;justify-content:space-between;align-items:center;padding-top:26px;padding-bottom:30px}
+.site-footer .f{font-size:24px;color:var(--card)}
+
+/* o que somos */
+.purpose{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;padding-top:80px;align-items:start}
+.purpose h1{font-size:58px;line-height:1.06;margin-top:16px}
+.purpose .hand{font-size:30px;margin-top:20px;transform:rotate(-3deg);display:block}
+.lead-copy{display:flex;flex-direction:column;gap:18px;font-size:18px;color:var(--mut)}
+.block-title{text-align:center;margin-bottom:40px}
+.block-title .eyebrow{margin-bottom:6px}.block-title h2{font-size:40px}
+.block{padding-top:96px}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lane{border-radius:22px;padding:36px 36px 36px 40px}
+.lane.a{background:#EEE5F4}.lane.b{background:#E6EEDD}
+.lane h3{font-size:28px;margin:6px 0 28px}
+.lane ol{margin:0 0 0 22px;padding:0 0 0 36px;border-left:1px dashed var(--plum);display:flex;flex-direction:column;gap:26px;list-style:none}
+.lane li{position:relative}
+.lane li>span{position:absolute;left:-59px;top:0;width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font:italic 500 18px Fraunces,serif}
+.lane h4{font-size:19px}.lane li p{font-size:15px;color:var(--mut)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pillar{padding:30px}
+.ibub{width:64px;height:64px;border-radius:50%;background:#E4DAF2;border:1px dashed var(--plum);display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--plum)}
+.pillar h3{font-size:22px;margin-bottom:8px}.pillar p{color:var(--mut)}
+.cta{padding-top:80px}
+.cta-band{background:#C5D6B8;padding:52px 52px 64px;display:flex;justify-content:space-between;align-items:center;gap:24px}
+.cta-band h2{font-size:36px;max-width:520px}
+.cta-actions{display:flex;align-items:center;gap:24px}
+
+/* perfil do artista */
+.profile{padding-top:28px}
+.banner{position:relative;height:230px;border-radius:22px;overflow:hidden;background:#EEE5F4;border:1px solid var(--line)}
+.banner .sunc{position:absolute;right:90px;top:34px;width:110px;height:110px;border-radius:50%;background:#C5D6B8}
+.banner .g{position:absolute;left:0;right:0;bottom:0;height:120px;background:#C5D6B8}
+.banner .l{position:absolute;left:30%;right:0;bottom:0;height:80px;background:#CDBFE6;transform:scaleY(-1)}
+.banner .btn{position:absolute;right:16px;top:16px;background:var(--card);z-index:2}
+.identity{display:flex;gap:24px;align-items:flex-end;margin-top:-64px;padding:0 32px;position:relative}
+.big-avatar{flex:none;width:112px;height:136px;border:5px solid var(--paper);outline:1px solid var(--edge);display:flex;align-items:flex-end;justify-content:center;padding-bottom:16px;font:500 34px Fraunces,serif}
+.identity .who{flex:1;padding-bottom:8px}
+.identity h1{font-size:42px}
+.identity .bd{font-size:14px;padding:8px 16px;margin-bottom:12px}
+.bio{max-width:700px;padding:20px 32px 0}
+.tabs{display:flex;gap:30px;border-bottom:1px dashed #CFC1B0;margin-top:30px;padding:0 32px}
+.tabs button{border:0;background:none;font:500 15px 'DM Sans',sans-serif;color:var(--mut);padding:10px 2px}
+.tabs button.on{color:var(--ink);border-bottom:1.5px solid var(--terra)}
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;gap:14px;padding-top:32px}
+.mosaic .scene{border-radius:14px}.mosaic .scene.arch{border-radius:999px 999px 16px 16px}.mosaic .span2{grid-row:span 2}
+.commissions{padding-top:72px}
+.commission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.commission{padding:30px;position:relative}
+.commission.featured{background:#EEE5F4;border-color:var(--plum)}
+.commission .hand{position:absolute;right:22px;top:16px;font-size:24px;transform:rotate(4deg)}
+.commission h3{font-size:24px}.commission .sub{font-size:14px;margin-top:4px;color:var(--mut)}
+.commission .price{font:500 42px Fraunces,serif;margin:22px 0 4px}
+.commission .mono{font-size:11px;color:var(--mut);margin-bottom:24px}
+.note{font-size:14px;margin-top:16px;color:var(--mut)}
+
+/* modo criador */
+.creator{padding-top:40px}
+.creator-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;gap:16px;flex-wrap:wrap}
+.creator-heading h1{font-size:42px}
+.creator-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+.form-stack{display:flex;flex-direction:column;gap:24px}
+.form-card{padding:30px;display:flex;flex-direction:column;gap:18px}
+.form-card h2{font-size:24px}
+.in{width:100%;min-height:46px;border:1px solid #CFC1B0;border-radius:14px;padding:0 16px;font:400 15px 'DM Sans',sans-serif;background:var(--card);color:var(--ink)}
+textarea.in{padding:12px 16px;resize:vertical}
+.price-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.check{display:flex;align-items:center;gap:12px;font-weight:500}
+.check input{width:22px;height:22px;accent-color:var(--plum)}
+.upload{border:1.5px dashed var(--plum);background:#EEE5F4;border-radius:20px;padding:40px 20px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center}
+.upload::before{content:"";position:absolute;inset:0;border-radius:20px;opacity:.12;background-image:radial-gradient(var(--plum) 1px,transparent 1.2px);background-size:10px 10px}
+.upload>*{position:relative}
+.upload .f{font-size:22px}.upload .mono{margin:8px 0 18px;color:var(--mut)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end}
+.thumbs .scene{border-radius:14px}.thumbs .scene.arch{border-radius:999px 999px 16px 16px}
+
+/* mobile */
+@media (max-width:900px){
+.w{padding:0 24px}
+.menu-toggle{display:block}
+.main-nav{display:none;position:absolute;top:84px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:12px 24px 20px;background:var(--paper);border-bottom:1px solid var(--line)}
+.main-nav.open{display:flex}.main-nav button{text-align:left;padding:14px 0}.main-nav>button.on{border-bottom:0;color:var(--terra)}
+.nav-actions{margin-top:10px}.nav-actions .btn{flex:1}
+.hero,.purpose,.creator-layout,.lanes,.pillars,.commission-grid{grid-template-columns:minmax(0,1fr)}
+.hero>*,.purpose>*,.creator-layout>*{min-width:0}
+.hero{gap:24px;padding-top:40px}
+.hero h1{font-size:46px}.purpose h1{font-size:44px}.purpose{gap:32px;padding-top:56px}
+.hero-art{height:490px;width:100%;transform-origin:top left;transform:scale(.72);margin-bottom:-135px}
+.artist-grid{grid-template-columns:1fr 1fr}
+.cta-band{flex-direction:column;align-items:flex-start;padding:40px 28px 52px}.cta-band h2{font-size:30px}.cta-actions{flex-wrap:wrap}
+.mosaic{grid-template-columns:repeat(2,1fr)}
+.identity{flex-wrap:wrap;padding:0 8px}.identity .who{flex-basis:60%}
+.tabs,.bio{padding-left:8px;padding-right:8px}
+.block{padding-top:64px}.block-title h2{font-size:32px}
+}
+@media (max-width:560px){
+.artist-grid{grid-template-columns:1fr}
+.hero-art{transform:scale(.62);margin-bottom:-185px}
+.price-row{grid-template-columns:1fr}
+.site-footer .w{flex-direction:column;gap:8px;text-align:center}
+.nav-actions .btn{padding:0 12px}
+}
+
+/* paleta enxuta: roxo + verde sobre papel, com contornos firmes */
+:root{--terra:#6C55A3;--edge:#3B3340}
+.eyebrow{color:#3F5A33}
+.t2,.t6{background:linear-gradient(160deg,#C5D6B8,#E2EBD9)}.t3,.t4{background:linear-gradient(160deg,#CDBFE6,#EAE2F6)}.t0{background:#FBF7F0}
+.scene,.strip,.avatar{border-width:1.5px}.strip .scene+.scene{border-left-width:1.5px}
+.awn-stripe{background:repeating-linear-gradient(90deg,#C5D6B8 0 36px,#CDBFE6 36px 72px)}
+.awn{background:radial-gradient(circle at 18px 0,#C5D6B8 17px,transparent 18.5px) 0 0/72px 18px repeat-x,radial-gradient(circle at 18px 0,#CDBFE6 17px,transparent 18.5px) 36px 0/72px 18px repeat-x}
+.lane.b{background:#E6EEDD}.lane.a li>span{background:#CDBFE6}.lane.b li>span{background:#C5D6B8}
+.ibub{background:var(--terra);border:0;color:#FBF7F0}
+.banner .sunc{background:#FBF7F0;border:1.5px solid var(--ink)}
+.hero-art .sunc{left:318px;top:-8px;width:112px;height:112px;border-radius:50%;background:var(--card);border:1.5px solid var(--ink);display:grid;place-items:center}
+.hero-art .sunc svg{width:100px;height:100px}
+.hero-art .a2{background:radial-gradient(rgba(74,63,92,.28) 1px,transparent 1.4px) 0 0/9px 9px,linear-gradient(160deg,#C5D6B8,#E2EBD9)}
+.rule{height:5px;border-radius:3px;background:var(--terra);margin-top:6px}
+
+/* grão suavizado nos blocos com texto de "O Que Somos" */
+.lane,.pillar,.cta-band{position:relative;z-index:101}
+.lane>*,.cta-band>*,.pillar>*{position:relative}
+.lane::after,.pillar::after,.cta-band::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.35;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .25 1.2 0 0 0 -.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+/* retículas (halftone) */
+.ht{display:none;position:absolute;inset:0;background-image:radial-gradient(rgba(74,63,92,.42) 1px,transparent 1.4px);background-size:6px 6px;-webkit-mask-image:linear-gradient(200deg,transparent 35%,#000);mask-image:linear-gradient(200deg,transparent 35%,#000)}
+.strip .scene:nth-child(2) .ht,.mosaic .scene:nth-child(3n+1) .ht,.thumbs .scene:nth-child(2) .ht,.hero-art .a1 .ht,.hero-art .a3 .ht{display:block}
+.hero-wrap>.tA::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(74,63,92,.26) 1px,transparent 1.4px);background-size:9px 9px;-webkit-mask-image:radial-gradient(ellipse 42% 65% at 100% 0,#000,transparent);mask-image:radial-gradient(ellipse 42% 65% at 100% 0,#000,transparent)}
+.hero-wrap>.tA{overflow:hidden}
+.cta-band::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(74,63,92,.22) 1px,transparent 1.4px);background-size:9px 9px;-webkit-mask-image:radial-gradient(ellipse 32% 60% at 0 100%,#000,transparent);mask-image:radial-gradient(ellipse 32% 60% at 0 100%,#000,transparent)}
+.lane::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(74,63,92,.2) 1px,transparent 1.4px);background-size:8px 8px;-webkit-mask-image:radial-gradient(ellipse 38% 45% at 100% 100%,#000,transparent);mask-image:radial-gradient(ellipse 38% 45% at 100% 100%,#000,transparent)}
+.lane{overflow:hidden}
+.banner::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(74,63,92,.26) 1px,transparent 1.4px);background-size:9px 9px;-webkit-mask-image:radial-gradient(ellipse 45% 80% at 0 0,#000,transparent);mask-image:radial-gradient(ellipse 45% 80% at 0 0,#000,transparent)}
+.commission.featured::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image:radial-gradient(rgba(74,63,92,.2) 1px,transparent 1.4px);background-size:8px 8px;-webkit-mask-image:radial-gradient(ellipse 45% 40% at 100% 100%,#000,transparent);mask-image:radial-gradient(ellipse 45% 40% at 100% 100%,#000,transparent)}
+.commission>*{position:relative}
+.site-footer{position:relative}.site-footer::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(245,238,227,.2) 1px,transparent 1.4px);background-size:9px 9px;-webkit-mask-image:linear-gradient(90deg,#000,transparent 55%);mask-image:linear-gradient(90deg,#000,transparent 55%)}
+.site-footer>*{position:relative}
+.ibub{background:radial-gradient(rgba(251,247,240,.3) 1px,transparent 1.4px) 0 0/6px 6px,var(--terra)}
+
+.spin{transform-box:view-box;transform-origin:60px 60px;animation:spin 16s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:48s!important}}
+
+.sr{transform-box:view-box;transform-origin:60px 60px}
+/* ===== Plataforma: explorar, perfis, modais ===== */
+.explore{padding-top:72px}
+.explore-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:26px}
+.explore-head h2{font-size:46px;margin-top:6px}.explore-head p.mut{max-width:430px;font-size:17px}
+.search-card{margin-bottom:8px}
+.result-line{margin:18px 2px 16px;min-height:16px}
+.empty{text-align:center;padding:48px 0}.empty h3{font-size:26px}
+.page.enter,.tabpane.enter{animation:pageIn .42s cubic-bezier(.2,.7,.2,1)}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* imagens com skeleton */
+.imgbox{position:relative;display:block;overflow:hidden;background:linear-gradient(100deg,#E9E0F3 30%,#F8F2E9 50%,#E9E0F3 70%) 0 0/200% 100%;animation:sh 1.5s linear infinite}
+.imgbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.imgbox.ok{animation:none;background:#EAE2F6}.imgbox.ok img{opacity:1}
+.imgbox.err{animation:none;background:linear-gradient(160deg,#CDBFE6,#DFE9D5)}.imgbox.err img{display:none}
+.imgbox.err::after{content:"";position:absolute;left:50%;top:50%;width:34%;max-width:64px;aspect-ratio:3/4;transform:translate(-50%,-50%);border:1.5px solid var(--ink);border-radius:999px 999px 8px 8px;background:#FBF7F0}
+@keyframes sh{to{background-position:-200% 0}}
+/* cards */
+a.artist-card{display:block;color:inherit;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+a.artist-card:hover,a.artist-card:focus-visible{transform:translateY(-4px);box-shadow:0 18px 32px -22px rgba(74,63,92,.65)}
+.strip .imgbox{aspect-ratio:1}.strip .imgbox+.imgbox{border-left:1.5px solid var(--edge)}
+a.artist-card:hover .strip .imgbox img,a.artist-card:focus-visible .strip .imgbox img{transform:scale(1.08)}
+.avatar{position:relative;overflow:hidden}.avatar .imgbox,.big-avatar .imgbox,.pbanner .imgbox{position:absolute;inset:0}
+.badges{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}.badges .bd{margin-top:0}
+.cat-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{font:500 10px 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid #CFC1B0;border-radius:999px;padding:3px 9px;color:var(--mut)}
+.bd.wait{background:#F3E4A6;color:#6A5400}.bd.n{background:#CDBFE6;color:#4A3F5C}
+.go{display:inline-block;transition:transform .3s}a.artist-card:hover .go{transform:translateX(4px)}
+/* perfil público */
+.pbanner{position:relative;height:270px;border-radius:22px;overflow:hidden;border:1.5px solid var(--ink)}
+.pbanner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(rgba(251,247,240,.6) 1px,transparent 1.4px);background-size:8px 8px;-webkit-mask-image:radial-gradient(ellipse 42% 75% at 100% 0,#000,transparent);mask-image:radial-gradient(ellipse 42% 75% at 100% 0,#000,transparent)}
+.pbanner .back{position:absolute;left:16px;top:16px;z-index:2;background:var(--card)}
+.big-avatar{position:relative;overflow:hidden}
+.spec{display:flex;gap:8px;flex-wrap:wrap;padding:16px 32px 0}
+.stats{display:flex;gap:34px;flex-wrap:wrap;padding:20px 32px 0}.stats div{display:flex;flex-direction:column}.stats b{font:500 26px Fraunces,serif}.stats span{font:500 10px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.gallery{columns:3;column-gap:16px;padding-top:32px}
+.work{display:block;width:100%;margin:0 0 16px;padding:0;break-inside:avoid;border:1.5px solid var(--ink);border-radius:16px;overflow:hidden;position:relative;cursor:zoom-in;background:none}
+.work .imgbox{width:100%}
+.work:hover .imgbox img,.work:focus-visible .imgbox img{transform:scale(1.07)}
+.work .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:38px 14px 12px;background:linear-gradient(transparent,rgba(59,51,64,.82));color:#FBF7F0;text-align:left;transform:translateY(101%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.work:hover .cap,.work:focus-visible .cap{transform:none}.cap b{font:500 17px Fraunces,serif;display:block}.cap span{font:500 10px 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+@media (hover:none){.work .cap{transform:none}}
+#tab-plans .commission-grid{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.inc{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px}.inc li{display:flex;gap:8px}.inc li::before{content:"✓";color:var(--terra);font-weight:700}
+.plans-note{margin:-8px 0 20px}
+/* modais */
+.modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal .bk{position:absolute;inset:0;background:rgba(59,51,64,.74)}
+.panel{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:22px;max-height:calc(100vh - 40px);overflow:auto;animation:popIn .32s cubic-bezier(.2,.7,.2,1)}
+@keyframes popIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.x{position:absolute;right:14px;top:14px;z-index:5;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card);font-size:16px}
+.lbp{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);width:min(1080px,100%)}
+.lb-img{position:relative;background:#EAE2F6;border-right:1.5px solid var(--ink)}.lb-img .imgbox{width:100%;height:min(78vh,720px)}.lb-img img{object-fit:contain}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card);font-size:18px}.lb-nav.prev{left:12px}.lb-nav.next{right:12px}
+.lb-info{padding:56px 30px 30px;display:flex;flex-direction:column;gap:12px}.lb-info h2{font-size:32px}
+.lb-artist{display:flex;align-items:center;gap:12px;margin:8px 0 12px}.lb-artist .avatar{width:44px;height:44px}
+.rqp{width:min(560px,100%);padding:34px}.rqp form,.rqp #rq-done{display:flex;flex-direction:column;gap:16px}.rqp h2{font-size:30px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+select.in{padding-right:10px}
+.toast{position:fixed;left:50%;bottom:28px;z-index:95;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--plum);color:var(--card);border-radius:999px;padding:13px 24px;font-weight:600;font-size:14px;transition:opacity .35s,transform .35s;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* criar perfil */
+#plans{display:flex;flex-direction:column;gap:18px}
+#plans .price-row{grid-template-columns:2fr 1fr 1fr 44px;align-items:end}
+.rm{width:44px;height:46px;border-radius:14px;border:1px solid #CFC1B0;background:var(--card)}
+.in[aria-invalid="true"]{border-color:var(--terra);box-shadow:0 0 0 2px rgba(108,85,163,.25)}
+.thumbs.mini{grid-template-columns:repeat(4,1fr)}.thumbs.mini:empty{display:none}
+.thumb{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1.5px solid var(--ink)}.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb button{position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink);background:var(--card);font-size:12px}
+.upload.drag{background:#E0D4F1}
+.picker{display:flex;align-items:center;gap:16px}.picker .avatar{width:64px;height:64px;flex:none;border-radius:50%}.picker .ban{width:112px;height:64px;flex:none;border-radius:12px;overflow:hidden;position:relative;border:1.5px solid var(--ink)}.picker .ban .imgbox,.picker .avatar .imgbox{position:absolute;inset:0}
+@media (prefers-reduced-motion:reduce){.imgbox{animation:none}.page.enter,.tabpane.enter,.panel{animation:none}.work:hover .imgbox img,a.artist-card:hover .strip .imgbox img{transform:none}a.artist-card:hover{transform:none}}
+@media (max-width:900px){.gallery{columns:2}.lbp{grid-template-columns:1fr}.lb-img{border-right:0;border-bottom:1.5px solid var(--ink)}.lb-img .imgbox{height:min(52vh,460px)}.lb-info{padding:24px}.explore-head h2{font-size:38px}.pbanner{height:200px}.stats,.spec{padding-left:8px;padding-right:8px}}
+@media (max-width:560px){.gallery{columns:1}.two{grid-template-columns:1fr}#plans .price-row{grid-template-columns:1fr 1fr}.thumbs.mini{grid-template-columns:repeat(3,1fr)}.rqp{padding:24px 20px}}
+.picker .lb{margin:0 0 8px!important}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<header class="site-header"><div class="w"><button class="brand" data-go="home" aria-label="Ir para a home"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg><span class="f">Vritini</span></button><button class="menu-toggle" id="mt" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="main-nav" id="nav"><button data-go="home">Explorar</button><button data-go="about">O Que Somos</button><button data-go="creator">Criar Meu Perfil</button><div class="nav-actions"><button class="btn s">Entrar</button><button class="btn p">Cadastrar</button></div></nav></div><div class="awn-stripe" aria-hidden="true"></div><div class="awn" aria-hidden="true"></div></header>
+<main class="page" id="p-home"><div class="hero-wrap"><div class="tB"></div><div class="tA"></div><section class="w hero"><div><p class="eyebrow">Vitrine de artistas · comissões</p><h1>Sua arte na <em>vitrine</em> certa.</h1><p class="hero-text">Foque em criar, nós trazemos os clientes até você. Artistas montam portfólio e tabela de preços; clientes encontram o estilo exato e encomendam com facilidade e segurança.</p><div class="button-row"><button class="btn p lg" data-go="creator">Sou Artista (Criar Vitrine)</button><button class="btn s lg" data-scroll="explorar">Quero Encomendar uma Arte</button></div></div><div class="hero-art" aria-hidden="true"><div class="scene t1 arch a1" style="--sun:#FBF7F0;--hill:#C5D6B8;"><i class="ht"></i></div><div class="scene t5 arch a2" style="--sun:#FBF7F0;--hill:#CDBFE6;"><i class="ht"></i></div><div class="scene t0 arch a3" style="--sun:#4A3F5C;--hill:#C5D6B8;"><i class="ht"></i></div><div class="sunc"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="VITRINE DE ARTE"><path id="stamp-hero" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:16s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-hero" textLength="272" lengthAdjust="spacing">VITRINE DE ARTE · VITRINE DE ARTE ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg></div><p class="hand">cada traço<br>tem seu lugar ↗</p></div></section></div>
+<section class="w explore" id="explorar"><div class="explore-head"><div><p class="eyebrow">Vitrine aberta</p><h2>Explorar <em>Artistas</em></h2></div><p class="mut">Descubra talentos independentes e encontre o traço ideal para o seu projeto.</p></div>
+<div class="card search-card"><label class="search-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="q" type="search" autocomplete="off" placeholder="Busque por nome, @usuário ou tag (ex.: chibi, mascote, rpg)" aria-label="Buscar artistas por nome ou tag"></label>
+<div class="filters" id="filters" role="group" aria-label="Filtrar por estilo artístico"><button class="pill on" data-cat="Todos" aria-pressed="true">Todos</button><button class="pill" data-cat="Anime/Mangá" aria-pressed="false">Anime/Mangá</button><button class="pill" data-cat="Realismo" aria-pressed="false">Realismo</button><button class="pill" data-cat="Cartoon" aria-pressed="false">Cartoon</button><button class="pill" data-cat="Pixel Art" aria-pressed="false">Pixel Art</button><button class="pill" data-cat="Concept Art" aria-pressed="false">Concept Art</button></div></div>
+<p class="result-line mono mut" id="count" aria-live="polite"></p>
+<div class="artist-grid" id="grid"></div>
+<div class="empty" id="empty" hidden><h3>Nenhum artista encontrado</h3><p class="mut">Tente outro nome, tag ou estilo.</p><button class="btn s" id="clear" style="margin-top:16px">Limpar filtros</button></div></section></main><main class="page" id="p-about" hidden><section class="w purpose"><div><p class="eyebrow">Nosso propósito</p><h1>Onde o talento encontra <em>quem procura.</em></h1><span class="hand">menos pressão, mais arte ↓</span></div><div class="lead-copy"><p>Muitos artistas talentosos gastam horas preciosas tentando vencer algoritmos e divulgando sem parar nas redes sociais, só para conseguir clientes.</p><p>O Vritini nasceu para libertar desenhistas dessa pressão: uma vitrine inteligente e organizada, onde o portfólio e a tabela de preços trabalham por você.</p><p>Para quem contrata, é um só lugar para encontrar profissionais confiáveis e o estilo exato que procura.</p><div class="rule"></div></div></section>
+<section class="w block"><div class="block-title"><p class="eyebrow">Passo a passo</p><h2>Como <em>funciona</em></h2></div><div class="lanes"><div class="lane a"><p class="eyebrow">Artista</p><h3>Para o artista</h3><ol><li><span>1</span><h4>Crie sua vitrine</h4><p>Monte o perfil com bio, avatar e portfólio.</p></li><li><span>2</span><h4>Defina seus preços</h4><p>Cadastre tipos de desenho, valores e prazos.</p></li><li><span>3</span><h4>Receba pedidos</h4><p>Clientes encomendam direto na sua vitrine.</p></li></ol></div><div class="lane b"><p class="eyebrow">Contratante</p><h3>Para o contratante</h3><ol><li><span>1</span><h4>Explore estilos</h4><p>Busque por categoria ou palavra-chave.</p></li><li><span>2</span><h4>Escolha o artista</h4><p>Compare portfólios, preços e prazos.</p></li><li><span>3</span><h4>Encomende com segurança</h4><p>Negocie direto e acompanhe seu pedido.</p></li></ol></div></div></section>
+<section class="w block"><div class="block-title"><p class="eyebrow">Em que acreditamos</p><h2>Pilares do <em>Vritini</em></h2></div><div class="pillars"><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Visibilidade Justa</h3><p>Sua arte é encontrada pelo estilo que você cria, com destaque justo para cada artista.</p></div><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div><h3>Portfólio Profissional</h3><p>Uma vitrine organizada, com galeria, preços e prazos claros.</p></div><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div><h3>Negociação Direta</h3><p>Artista e cliente combinam os detalhes da encomenda sem intermediários.</p></div></div></section>
+<section class="w cta"><div class="cta-band tA"><h2>Sua arte merece uma <em>vitrine</em> bonita.</h2><div class="cta-actions"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="FEITO À MÃO"><path id="stamp-feito" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:20s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-feito" textLength="272" lengthAdjust="spacing">FEITO À MÃO · FEITO À MÃO ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg><button class="btn p lg" data-go="creator">Criar minha vitrine ↗</button></div></div></section></main><main class="page w creator" id="p-creator" hidden><form id="cf" novalidate><div class="creator-heading"><div><p class="eyebrow">Modo Criador</p><h1>Monte sua <em>vitrine</em></h1></div><div class="button-row" style="margin:0"><button type="button" class="btn s" id="draft">Salvar rascunho</button><button type="submit" class="btn p">Publicar vitrine</button></div></div>
+<div class="creator-layout"><div class="form-stack"><div class="card form-card"><h2><em>1.</em> Seus dados</h2>
+<div><label class="lb" for="cf-name">Nome artístico</label><input class="in" id="cf-name" autocomplete="off" placeholder="Como você quer ser chamado(a)"></div>
+<div class="two"><div><label class="lb" for="cf-user">@usuário</label><input class="in" id="cf-user" autocomplete="off" placeholder="seunome"></div><div><label class="lb" for="cf-city">Cidade</label><input class="in" id="cf-city" autocomplete="off" placeholder="Ex.: Belo Horizonte, MG"></div></div>
+<div><label class="lb" for="cf-bio">Bio</label><textarea class="in" id="cf-bio" rows="3" maxlength="280" placeholder="Conte seu estilo em poucas linhas"></textarea></div>
+<div><p class="lb">Estilos</p><div class="filters" id="cf-cats"><button type="button" class="pill on" data-c="Anime/Mangá" aria-pressed="true">Anime/Mangá</button><button type="button" class="pill" data-c="Realismo" aria-pressed="false">Realismo</button><button type="button" class="pill" data-c="Cartoon" aria-pressed="false">Cartoon</button><button type="button" class="pill" data-c="Pixel Art" aria-pressed="false">Pixel Art</button><button type="button" class="pill" data-c="Concept Art" aria-pressed="false">Concept Art</button></div></div>
+<label class="check"><input type="checkbox" id="cf-open" checked>Comissões abertas (desmarque para “Lista de Espera”)</label></div>
+<div class="card form-card"><h2><em>2.</em> Tabela de preços</h2><div id="plans"></div><button type="button" class="btn s" id="add-plan" style="align-self:flex-start">+ Adicionar tipo de desenho</button></div></div>
+<div class="form-stack"><div class="card form-card"><h2><em>3.</em> Portfólio</h2><div class="upload" id="drop"><p class="f">Arraste suas artes aqui</p><p class="mono">PNG · JPG · WebP</p><input type="file" id="cf-works" accept="image/*" multiple hidden><button type="button" class="btn p" id="pick-works">Escolher arquivos</button></div><div class="thumbs mini" id="wthumbs"></div><p class="note" id="wnote" style="margin:0">Sem imagens? Usaremos exemplos para sua vitrine não ficar vazia.</p></div>
+<div class="card form-card"><h2><em>4.</em> Aparência</h2><div class="picker"><div class="avatar"><span class="imgbox" id="av-prev"></span></div><div><p class="lb" style="margin:0">Foto de perfil</p><button type="button" class="btn s" id="pick-av">Escolher foto</button></div><input type="file" id="cf-av" accept="image/*" hidden></div><div class="picker"><div class="ban"><span class="imgbox" id="bn-prev"></span></div><div><p class="lb" style="margin:0">Banner de capa</p><button type="button" class="btn s" id="pick-bn">Escolher banner</button></div><input type="file" id="cf-bn" accept="image/*" hidden></div></div></div></div></form></main><main class="page" id="p-artist" hidden></main>
+<footer class="site-footer tT"><div class="w"><span class="f">Vritini</span><p class="mono">Cada traço tem seu lugar.</p></div></footer>
+</div>
+<div class="modal" id="lb" hidden role="dialog" aria-modal="true" aria-label="Obra ampliada"><div class="bk" data-close></div><div class="panel lbp"></div></div>
+<div class="modal" id="rq" hidden role="dialog" aria-modal="true" aria-labelledby="rq-title"><div class="bk" data-close></div><div class="panel rqp"><button class="x" data-close aria-label="Fechar">✕</button>
+<form id="rq-f"><p class="eyebrow">Solicitar comissão</p><h2 id="rq-title"></h2>
+<div><label class="lb" for="rq-artist">Artista</label><input class="in" id="rq-artist" readonly></div>
+<div><label class="lb" for="rq-plan">Pacote</label><select class="in" id="rq-plan" data-focus></select><p class="mono mut" id="rq-sum" style="margin-top:8px"></p></div>
+<div class="two"><div><label class="lb" for="rq-name">Seu nome</label><input class="in" id="rq-name" required autocomplete="name"></div><div><label class="lb" for="rq-mail">E-mail</label><input class="in" id="rq-mail" type="email" required autocomplete="email"></div></div>
+<div><label class="lb" for="rq-brief">Descreva sua ideia</label><textarea class="in" id="rq-brief" rows="3" required placeholder="Personagem, pose, clima, cores, uso da arte…"></textarea></div>
+<div><label class="lb" for="rq-ref">Link de referências (opcional)</label><input class="in" id="rq-ref" placeholder="Pinterest, Drive, Instagram…"></div>
+<button class="btn p full" type="submit">Enviar pedido</button><p class="note" style="margin:0">Nenhum pagamento é feito agora. O artista responde com orçamento e prazo.</p></form>
+<div id="rq-done" hidden><p class="eyebrow">Tudo certo</p><h2>Pedido <em>enviado!</em></h2><p class="mut" id="rq-msg" style="margin:12px 0 20px"></p><button class="btn p full" data-close>Fechar</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s);},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var fmt=function(n){return 'R$ '+Number(n).toLocaleString('pt-BR');};
+var norm=function(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();};
+/* ---- IMAGENS: troque as URLs abaixo (ou esta função) por suas artes reais ---- */
+var IMG=function(seed,w,h){return 'https://picsum.photos/seed/'+encodeURIComponent(seed)+'/'+w+'/'+h;};
+var CATS=['Anime/Mangá','Realismo','Cartoon','Pixel Art','Concept Art'];
+
+function mk(o){return {id:o.id,name:o.name,user:o.user,city:o.city,cats:o.cats,tags:o.tags,bio:o.bio,status:o.status,since:o.since,done:o.done,rating:o.rating,days:o.days,
+avatar:IMG(o.id+'-avatar',320,320),banner:IMG(o.id+'-banner',1400,420),
+works:o.works.map(function(x,i){var s=o.id+'-arte-'+(i+1);return {t:x[0],d:x[1],tech:x[2],r:x[3],src:IMG(s,640,Math.round(640*x[3])),full:IMG(s,1400,Math.round(1400*x[3]))};}),
+plans:o.plans.map(function(p){return {n:p[0],d:p[1],p:p[2],days:p[3],inc:p[4]};})};}
+var ARTISTS=[
+mk({id:'luna-takahashi',name:'Luna Takahashi',user:'lunatkh',city:'Curitiba, PR',cats:['Anime/Mangá'],tags:['chibi','oc','mangá','vtuber','personagens originais'],status:'open',since:2019,done:312,rating:'4.9',days:5,
+bio:'Ilustradora de Curitiba apaixonada por mangá e personagens originais. Pinto cenas com muita luz, cabelos cheios de movimento e um toque nostálgico dos animes dos anos 2000.',
+works:[['Nascer do Sol em Quioto','Estudo de cenário com personagem em contraluz.','Digital · Clip Studio · 2025',1.25],['Garota do Guarda-chuva','Capa de one-shot inspirada em dias de chuva.','Digital · 2025',1.4],['Gatinhos Samurai','Trio chibi para stickers de comunidade.','Digital · 2024',1],['Festival de Verão','Ilustração comemorativa com yukatas.','Digital · 2024',.75],['Estudo de Cabelos','Exercícios de movimento e brilho.','Digital · 2024',1.25],['Capa do Volume 01','Capa completa para mangá independente.','Digital · 2023',1.4]],
+plans:[['Ícone / Avatar','Busto em estilo mangá, fundo liso.',40,'3 a 5 dias',['Busto ou chibi','Fundo simples','1 revisão']],['Meio Corpo','Pose, expressão e fundo com cor.',90,'5 a 8 dias',['Até 1 personagem','Fundo estilizado','2 revisões']],['Ilustração Completa','Cena inteira com cenário detalhado.',180,'10 a 14 dias',['Corpo inteiro','Cenário completo','3 revisões','Arquivo em alta']]]}),
+mk({id:'rafael-duarte',name:'Rafael Duarte',user:'rafaduarte',city:'São Paulo, SP',cats:['Realismo'],tags:['retrato','óleo digital','grafite','pet','família'],status:'wait',since:2016,done:540,rating:'5.0',days:12,
+bio:'Retratista há oito anos. Transformo fotos de família, pets e personagens em pinturas realistas que parecem ter textura de tela. Agenda concorrida: peça com antecedência.',
+works:[['Dona Lourdes','Retrato em óleo digital a partir de foto antiga.','Digital · Procreate · 2025',1.25],['Olhar de Pantera','Estudo de pelagem e luz de estúdio.','Digital · 2025',.75],['O Violinista','Retrato encomendado para formatura.','Digital · 2024',1.4],['Retrato de Casal','Aniversário de 30 anos de casamento.','Digital · 2024',1],['Estudo de Mãos','Série de estudos em grafite digital.','Grafite digital · 2024',1],['Rex, o Labrador','Retrato pet com fundo texturizado.','Digital · 2023',1.25]],
+plans:[['Retrato Busto','Rosto e ombros com fundo texturizado.',150,'7 a 10 dias',['1 pessoa ou pet','Fundo texturizado','1 revisão']],['Retrato Meio Corpo','Pose natural com mãos e roupa.',260,'12 a 18 dias',['Até 2 pessoas','Detalhes de roupa','2 revisões']],['Pintura Completa','Obra final em alta resolução.',480,'25 a 30 dias',['Corpo inteiro','Cenário personalizado','3 revisões','Arquivo para impressão']]]}),
+mk({id:'beatriz-molina',name:'Beatriz Molina',user:'biamolina',city:'Belo Horizonte, MG',cats:['Cartoon'],tags:['mascote','logo','stickers','editorial','marca'],status:'open',since:2020,done:204,rating:'4.8',days:6,
+bio:'Crio mascotes, personagens e ilustrações editoriais com formas simples, cores alegres e muito humor. Já fiz mascotes para cafeterias, podcasts e marcas locais.',
+works:[['Café Bicho','Mascote para cafeteria de bairro.','Vetor · Illustrator · 2025',1],['Capivara Astronauta','Ilustração para camiseta.','Digital · 2025',1.25],['Pack de Stickers Polvo','12 expressões para mensageiros.','Digital · 2024',1],['Mascote do Podcast','Personagem com 5 poses.','Vetor · 2024',.75],['Raposa Chef','Ilustração de embalagem.','Digital · 2024',1.25],['Cartaz Feira Vegana','Cartaz A3 com lettering.','Digital · 2023',1.4]],
+plans:[['Pack de Stickers','3 stickers com a sua ideia.',70,'4 a 6 dias',['3 expressões','PNG transparente','1 revisão']],['Mascote (Cabeça)','Personagem para avatar e perfil.',120,'5 a 8 dias',['Cabeça e ombros','2 expressões','2 revisões']],['Mascote Completo','Corpo inteiro com folha de poses.',260,'10 a 14 dias',['Corpo inteiro','4 poses','Versão vetorial','3 revisões']]]}),
+mk({id:'theo-barros',name:'Théo Barros',user:'theo.pixel',city:'Recife, PE',cats:['Pixel Art'],tags:['sprite','tileset','animação','16-bit','avatar'],status:'wait',since:2018,done:178,rating:'4.9',days:8,
+bio:'Pixel artist e desenvolvedor de jogos indie. Faço sprites, tilesets e animações de até 16 frames para jogos, avatares e overlays de stream. Paleta limitada, personalidade ilimitada.',
+works:[['Cavaleiro de Bronze','Sprite com ciclo de idle e ataque.','Pixel · Aseprite · 2025',1],['Vila à Beira-mar','Cenário 320×180 com parallax.','Pixel · 2025',.66],['Mago Corvo','Personagem para RPG 16-bit.','Pixel · 2024',1.25],['Tileset Floresta','Conjunto de 48 tiles.','Pixel · 2024',1],['Cidade Neon','Cena cyberpunk em 8 cores.','Pixel · 2024',.66],['Sala do Dev','Ilustração isométrica.','Pixel · 2023',1]],
+plans:[['Avatar 64×64','Seu personagem em pixel art.',50,'3 a 5 dias',['1 personagem','PNG com fundo transparente','1 revisão']],['Sprite Animado','Ciclo de 8 frames (idle ou andar).',130,'6 a 9 dias',['8 frames','Spritesheet + GIF','2 revisões']],['Cenário Pixel','Cena 320×180 pronta para o jogo.',220,'10 a 15 dias',['Camadas separadas','Paleta personalizada','3 revisões']]]}),
+mk({id:'caio-mendes',name:'Caio Mendes',user:'caiomendes',city:'Porto Alegre, RS',cats:['Concept Art'],tags:['rpg','personagem','ambiente','keyframe','d&d'],status:'open',since:2017,done:226,rating:'4.9',days:10,
+bio:'Concept artist de personagens e ambientes para RPG de mesa, jogos e quadrinhos. Entrego folhas de personagem, estudos de silhueta e keyframes prontos para produção.',
+works:[['Guardiã das Cinzas','Concept de personagem com 3 vistas.','Digital · Photoshop · 2025',1.4],['Mercado de Ossos','Ambiente para campanha de RPG.','Digital · 2025',.66],['Estudo de Silhueta: Elfos','Exploração de formas e acessórios.','Digital · 2024',.75],['Cidade Flutuante','Keyframe para pitch de jogo.','Digital · 2024',.75],['Anão Ferreiro','Personagem com folha de expressões.','Digital · 2024',1.25],['Dragão de Cristal','Criatura com variações de cor.','Digital · 2023',1]],
+plans:[['Ficha de Personagem','Ilustração para sua campanha de RPG.',140,'6 a 9 dias',['1 personagem','Pose estática','1 revisão']],['Concept de Personagem','Frente, costas, perfil e detalhes.',320,'12 a 16 dias',['3 vistas','Paleta de cores','2 revisões']],['Ambiente / Keyframe','Cena com composição e iluminação.',450,'15 a 20 dias',['Composição completa','Variação de horário','3 revisões']]]}),
+mk({id:'marina-okabe',name:'Marina Okabe',user:'marinaokabe',city:'Salvador, BA',cats:['Realismo','Concept Art'],tags:['fantasia','capa de livro','criatura','pintura digital','natureza'],status:'open',since:2018,done:151,rating:'4.9',days:11,
+bio:'Pintora digital de fantasia realista. Gosto de luz dramática, texturas orgânicas e criaturas que parecem ter vivido na natureza. Atendo capas de livros e campanhas de RPG.',
+works:[['Raposa de Musgo','Criatura de floresta com luz suave.','Digital · Procreate · 2025',1.25],['A Bruxa dos Pântanos','Retrato de personagem para livro.','Digital · 2025',1.4],['Capa: Rio das Sombras','Capa de romance de fantasia.','Digital · 2024',1.4],['Cervo Lunar','Estudo de luz e atmosfera.','Digital · 2024',.75],['Estudo de Folhas','Texturas botânicas em aquarela digital.','Digital · 2024',1],['Sereia do Mangue','Ilustração de criatura marinha.','Digital · 2023',1.25]],
+plans:[['Retrato de Personagem','Busto detalhado com luz dramática.',180,'8 a 12 dias',['1 personagem','Fundo atmosférico','2 revisões']],['Criatura / Ilustração','Criatura ou cena em corpo inteiro.',380,'15 a 20 dias',['Composição completa','Texturas detalhadas','3 revisões']],['Capa de Livro','Arte de capa pronta para diagramação.',520,'20 a 30 dias',['Arte em alta resolução','Versão com título','3 revisões']]]})
+];
+
+/* ---- Conexão com o Supabase ---- */
+var SUPABASE_URL = 'https://zeodpizpejkzuonqxdr.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_qF4a6BnduP8OSGV8r-aTzw_8ZQbr02T';
+var db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function loadArtists() {
+  var { data, error } = await db.from('artists').select('*');
+  if (!error && data) {
+    data.forEach(function(p) {
+      p.isNew = true;
+      if (!ARTISTS.some(function(a) { return a.id === p.id; })) {
+        ARTISTS.unshift(p);
+      }
+    });
+    renderGrid();
+    if (location.hash.indexOf('#artist/') === 0) route();
+  }
+}
+loadArtists();
+
+function byId(id){for(var i=0;i<ARTISTS.length;i++)if(ARTISTS[i].id===id)return ARTISTS[i];}
+/* ---- imagens com skeleton ---- */
+function imgbox(src,alt,st){return '<span class="imgbox"'+(st?' style="'+st+'"':'')+'><img src="'+esc(src)+'" alt="'+esc(alt||'')+'" loading="lazy" decoding="async"></span>';}
+function hydrate(root){$$('.imgbox:not([data-h])',root).forEach(function(b){b.dataset.h=1;var i=b.querySelector('img');if(!i)return;
+i.addEventListener('load',function(){b.classList.remove('err');b.classList.add('ok');});i.addEventListener('error',function(){b.classList.remove('ok');b.classList.add('err');});
+if(i.complete&&i.naturalWidth)b.classList.add('ok');});}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('show');},3400);}
+/* ---- Explorar ---- */
+var state={cat:'Todos',q:''};
+function badge(a){return a.status==='open'?'<span class="bd a">● Comissões Abertas</span>':'<span class="bd wait">● Lista de Espera</span>';}
+function card(a){var min=Math.min.apply(null,a.plans.map(function(p){return p.p;}));
+return '<a class="card artist-card" href="#artist/'+esc(a.id)+'" aria-label="Ver portfólio de '+esc(a.name)+'"><div class="strip">'+a.works.slice(0,3).map(function(w){return imgbox(w.src,'Arte de '+a.name+': '+w.t);}).join('')+'</div><div class="artist-meta"><div class="avatar">'+imgbox(a.avatar,'Foto de '+a.name)+'</div><div><h3>'+esc(a.name)+'</h3><p class="mono mut">@'+esc(a.user)+'</p></div></div><div class="badges">'+badge(a)+(a.isNew?'<span class="bd n">Novo</span>':'')+'</div><div class="cat-row">'+a.cats.map(function(c){return '<span class="tag">'+esc(c)+'</span>';}).join('')+'</div><div class="card-bottom"><p>a partir de <b>'+fmt(min)+'</b></p><span class="text-link go">Ver Portfólio →</span></div></a>';}
+function renderGrid(){var q=norm(state.q).replace(/^@/,'').trim();
+var list=ARTISTS.filter(function(a){if(state.cat!=='Todos'&&a.cats.indexOf(state.cat)<0)return false;if(!q)return true;
+return norm([a.name,a.user].concat(a.tags,a.cats).join(' ')).indexOf(q)>=0;});
+var g=$('#grid');g.innerHTML=list.map(card).join('');hydrate(g);$('#empty').hidden=list.length>0;
+$('#count').textContent=list.length?list.length+(list.length>1?' artistas':' artista')+(state.cat!=='Todos'?' em '+state.cat:''):'';}
+$('#q').addEventListener('input',function(e){state.q=e.target.value;renderGrid();});
+$('#filters').addEventListener('click',function(e){var b=e.target.closest('[data-cat]');if(!b)return;state.cat=b.dataset.cat;$$('#filters .pill').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});renderGrid();});
+$('#clear').addEventListener('click',function(){state={cat:'Todos',q:''};$('#q').value='';$$('#filters .pill').forEach(function(x,i){x.classList.toggle('on',i===0);x.setAttribute('aria-pressed',i===0);});renderGrid();});
+/* ---- Perfil público ---- */
+var cur=null;
+function renderArtist(a){cur=a;var open=a.status==='open';
+var stats=a.isNew?'<div><b>Novo</b><span>na Vritini</span></div><div><b>'+a.plans.length+'</b><span>pacotes</span></div><div><b>'+a.works.length+'</b><span>obras</span></div>':'<div><b>★ '+esc(a.rating)+'</b><span>avaliação</span></div><div><b>'+a.done+'</b><span>pedidos concluídos</span></div><div><b>'+a.days+' dias</b><span>entrega média</span></div><div><b>'+a.since+'</b><span>na plataforma desde</span></div>';
+var gal=a.works.map(function(w,i){return '<button class="work" data-work="'+i+'" aria-label="Ampliar: '+esc(w.t)+'">'+imgbox(w.src,w.t,'aspect-ratio:1/'+w.r)+'<span class="cap"><b>'+esc(w.t)+'</b><span>'+esc(w.tech)+'</span></span></button>';}).join('');
+var plans=a.plans.map(function(p,i){var f=a.plans.length>=3&&i===1;return '<div class="card commission'+(f?' featured':'')+'">'+(f?'<p class="hand">mais pedido</p>':'')+'<h3>'+esc(p.n)+'</h3><p class="sub">'+esc(p.d)+'</p><p class="price">'+fmt(p.p)+'</p><p class="mono">Entrega em '+esc(p.days)+'</p><ul class="inc">'+(p.inc||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><button class="btn '+(f?'p':'s')+' full" data-plan="'+i+'">Solicitar Comissão</button></div>';}).join('');
+$('#p-artist').innerHTML='<div class="w profile"><div class="pbanner">'+imgbox(a.banner,'Banner de '+a.name)+'<button class="btn s back" data-back>← Voltar para Explorar</button></div><div class="identity"><div class="big-avatar arch">'+imgbox(a.avatar,'Foto de '+a.name)+'</div><div class="who"><h1>'+esc(a.name)+'</h1><p class="mono mut">@'+esc(a.user)+(a.city?' · '+esc(a.city):'')+'</p></div>'+badge(a).replace('class="bd','style="font-size:14px;padding:8px 16px;margin-bottom:12px" class="bd')+'</div><p class="bio mut">'+esc(a.bio||'Este artista ainda não escreveu uma bio.')+'</p><div class="spec">'+a.tags.map(function(t){return '<span class="tag">#'+esc(t)+'</span>';}).join('')+'</div><div class="stats">'+stats+'</div><div class="tabs" role="tablist"><button class="on" role="tab" data-tab="work" aria-selected="true">Portfólio</button><button role="tab" data-tab="plans" aria-selected="false">Tabela de Comissões</button></div></div><section class="w tabpane" id="tab-work"><div class="gallery" aria-label="Portfólio de '+esc(a.name)+'">'+gal+'</div></section><section class="w commissions tabpane" id="tab-plans" hidden><div style="margin-bottom:26px"><p class="eyebrow">Encomendas</p><h2 style="font-size:36px">Tabela de <em>comissões</em></h2></div>'+(open?'':'<p class="mut plans-note">Agenda cheia no momento: novos pedidos entram na lista de espera.</p>')+'<div class="commission-grid">'+plans+'</div><p class="note">Valores base. O artista confirma orçamento e prazo ao receber o pedido.</p></section>';
+hydrate($('#p-artist'));document.title=a.name+' (@'+a.user+') — Vritini';}
+function setTab(t){$$('#p-artist [data-tab]').forEach(function(b){var on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});['work','plans'].forEach(function(k){var el=$('#tab-'+k);var on=k===t;if(on&&el.hidden){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else if(!on)el.hidden=true;});}
+/* ---- Modais ---- */
+var openM=null,lastF=null,lb={i:0},rq={idx:0};
+function showM(id,opener){var m=$('#'+id);m.hidden=false;document.body.style.overflow='hidden';openM=m;lastF=opener||document.activeElement;var f=m.querySelector('[data-focus]')||m.querySelector('.x');if(f)f.focus();}
+function closeM(){if(!openM)return;openM.hidden=true;openM=null;document.body.style.overflow='';if(lastF&&lastF.focus&&document.contains(lastF))lastF.focus();}
+function drawLB(){var a=cur,i=lb.i,w=a.works[i];var p=$('#lb .panel');
+p.innerHTML='<button class="x" data-close aria-label="Fechar">✕</button><div class="lb-img">'+imgbox(w.full||w.src,w.t)+'<button class="lb-nav prev" data-nav="-1" aria-label="Obra anterior">←</button><button class="lb-nav next" data-nav="1" aria-label="Próxima obra">→</button></div><div class="lb-info"><p class="eyebrow">Obra '+(i+1)+' de '+a.works.length+'</p><h2>'+esc(w.t)+'</h2><p class="mut">'+esc(w.d)+'</p><p class="mono mut">'+esc(w.tech)+'</p><div class="lb-artist"><div class="avatar">'+imgbox(a.avatar,'')+'</div><div><b class="f" style="font-size:18px">'+esc(a.name)+'</b><p class="mono mut">@'+esc(a.user)+'</p></div></div><button class="btn p full" data-goplans>Ver tabela de comissões</button></div>';hydrate(p);}
+function sumRQ(){var p=cur.plans[+$('#rq-plan').value];$('#rq-sum').textContent=fmt(p.p)+' · entrega em '+p.days;}
+function openRQ(idx,opener){rq.idx=idx;var a=cur;$('#rq-f').reset();$('#rq-f').hidden=false;$('#rq-done').hidden=true;$('#rq-title').innerHTML='Pedido para <em>'+esc(a.name)+'</em>';$('#rq-artist').value=a.name+' (@'+a.user+')';
+$('#rq-plan').innerHTML=a.plans.map(function(p,i){return '<option value="'+i+'">'+esc(p.n)+' — '+fmt(p.p)+'</option>';}).join('');$('#rq-plan').value=idx;sumRQ();showM('rq',opener);}
+$('#rq-plan').addEventListener('change',sumRQ);
+$('#rq-f').addEventListener('submit',function(e){e.preventDefault();if(!e.target.checkValidity()){e.target.reportValidity();return;}var p=cur.plans[+$('#rq-plan').value];
+$('#rq-msg').textContent='Seu pedido de “'+p.n+'” ('+fmt(p.p)+') foi enviado para '+cur.name+'. A resposta chega em '+$('#rq-mail').value+'.';$('#rq-f').hidden=true;$('#rq-done').hidden=false;toast('Pedido enviado para @'+cur.user);});
+document.addEventListener('keydown',function(e){if(!openM)return;if(e.key==='Escape')closeM();
+else if(openM.id==='lb'&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){lb.i=(lb.i+(e.key==='ArrowRight'?1:-1)+cur.works.length)%cur.works.length;drawLB();}
+else if(e.key==='Tab'){var f=$$('button,input,select,textarea,a[href]',openM).filter(function(x){return !x.disabled&&x.offsetParent!==null;});if(!f.length)return;var first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+/* ---- Roteador ---- */
+var pages=['home','about','creator','artist'],pendingScroll=null,first=true;
+function show(p){pages.forEach(function(x){var el=$('#p-'+x),on=x===p;if(on){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else el.hidden=true;});
+$$('#nav>button').forEach(function(b){b.classList.toggle('on',b.dataset.go===(p==='artist'?'home':p));});$('#nav').classList.remove('open');}
+function route(){closeM();var h=location.hash.replace(/^#\/?/,'')||'home',parts=h.split('/'),p=parts[0];
+if(p==='artist'){var a=byId(decodeURIComponent(parts[1]||''));if(!a){location.replace('#home');return;}renderArtist(a);show('artist');setTab('work');}
+else{if(pages.indexOf(p)<0)p='home';show(p);document.title='Vritini — sua arte na vitrine certa';}
+if(pendingScroll){var t=$('#'+pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}else if(!first)window.scrollTo(0,0);first=false;}
+addEventListener('hashchange',route);
+document.addEventListener('click',function(e){var t;
+if(t=e.target.closest('[data-go]')){e.preventDefault();location.hash=t.dataset.go;return;}
+if(t=e.target.closest('[data-scroll]')){pendingScroll=t.dataset.scroll;if(location.hash.replace('#','')&&location.hash!=='#home'){location.hash='home';}else{var s=$('#'+pendingScroll);pendingScroll=null;s.scrollIntoView({behavior:'smooth',block:'start'});}return;}
+if(e.target.closest('[data-back]')){pendingScroll='explorar';location.hash='home';return;}
+if(t=e.target.closest('[data-tab]')){setTab(t.dataset.tab);return;}
+if(t=e.target.closest('[data-work]')){lb.i=+t.dataset.work;drawLB();showM('lb',t);return;}
+if(t=e.target.closest('[data-nav]')){lb.i=(lb.i+ +t.dataset.nav+cur.works.length)%cur.works.length;drawLB();return;}
+if(e.target.closest('[data-goplans]')){closeM();setTab('plans');$('#tab-plans').scrollIntoView({behavior:'smooth',block:'start'});return;}
+if(t=e.target.closest('[data-plan]')){openRQ(+t.dataset.plan,t);return;}
+if(e.target.closest('[data-close]')){closeM();return;}});
+$('#mt').addEventListener('click',function(){$('#nav').classList.toggle('open');});
+/* ---- Criar perfil ---- */
+var pend={works:[],avatar:null,banner:null};
+var slug=function(s){return norm(s).replace(/^@/,'').replace(/[^a-z0-9._]+/g,'').slice(0,24);};
+function planRow(n,p,d){var r=document.createElement('div');r.className='price-row';r.innerHTML='<div><label class="lb">Tipo<input class="in pn" style="margin-top:8px" value="'+esc(n||'')+'" placeholder="Ex.: Meio Corpo"></label></div><div><label class="lb">Preço (R$)<input class="in pp" style="margin-top:8px" inputmode="numeric" value="'+esc(p||'')+'" placeholder="0"></label></div><div><label class="lb">Prazo (dias)<input class="in pd" style="margin-top:8px" value="'+esc(d||'')+'" placeholder="5 a 8"></label></div><button type="button" class="rm" aria-label="Remover pacote">✕</button>';$('#plans').appendChild(r);}
+['Ícone / Avatar','Meio Corpo','Corpo Inteiro'].forEach(function(n){planRow(n,'','');});
+$('#add-plan').addEventListener('click',function(){planRow('','','');});
+$('#plans').addEventListener('click',function(e){var b=e.target.closest('.rm');if(b&&$$('#plans .price-row').length>1)b.parentNode.remove();});
+$('#cf-cats').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;var on=!b.classList.contains('on');b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});
+function readImg(file,max){return new Promise(function(res){var fr=new FileReader();fr.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res({src:c.toDataURL('image/jpeg',.7),r:c.height/c.width,t:file.name.replace(/\.[^.]+$/,'')});};im.onerror=function(){res(null);};im.src=fr.result;};fr.onerror=function(){res(null);};fr.readAsDataURL(file);});}
+function drawThumbs(){$('#wthumbs').innerHTML=pend.works.map(function(w,i){return '<div class="thumb"><img src="'+w.src+'" alt="'+esc(w.t)+'"><button type="button" data-rmw="'+i+'" aria-label="Remover imagem">✕</button></div>';}).join('');$('#wnote').textContent=pend.works.length?pend.works.length+' imagem(ns) selecionada(s).':'Sem imagens? Usaremos exemplos para sua vitrine não ficar vazia.';}
+function addWorks(files){Promise.all([].slice.call(files).filter(function(f){return /^image\//.test(f.type);}).slice(0,12).map(function(f){return readImg(f,800);})).then(function(r){pend.works=pend.works.concat(r.filter(Boolean)).slice(0,12);drawThumbs();});}
+$('#pick-works').addEventListener('click',function(){$('#cf-works').click();});$('#cf-works').addEventListener('change',function(e){addWorks(e.target.files);e.target.value='';});
+$('#wthumbs').addEventListener('click',function(e){var b=e.target.closest('[data-rmw]');if(b){pend.works.splice(+b.dataset.rmw,1);drawThumbs();}});
+var dz=$('#drop');['dragenter','dragover'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('drag');});});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('drag');});});dz.addEventListener('drop',function(e){addWorks(e.dataTransfer.files);});
+function picker(btn,inp,key,max,prev){$(btn).addEventListener('click',function(){$(inp).click();});$(inp).addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;readImg(f,max).then(function(r){if(!r)return;pend[key]=r.src;var p=$(prev);p.innerHTML='<img src="'+r.src+'" alt="">';p.classList.add('ok');});});}
+picker('#pick-av','#cf-av','avatar',400,'#av-prev');picker('#pick-bn','#cf-bn','banner',1000,'#bn-prev');
+function draftData(){return {name:$('#cf-name').value,user:$('#cf-user').value,city:$('#cf-city').value,bio:$('#cf-bio').value};}
+$('#draft').addEventListener('click',function(){try{localStorage.setItem('vritini.draft',JSON.stringify(draftData()));}catch(e){}toast('Rascunho salvo neste navegador.');});
+try{var dr=JSON.parse(localStorage.getItem('vritini.draft')||'null');if(dr){$('#cf-name').value=dr.name||'';$('#cf-user').value=dr.user||'';$('#cf-city').value=dr.city||'';$('#cf-bio').value=dr.bio||'';}}catch(e){}
+function bad(el,msg){el.setAttribute('aria-invalid','true');el.focus();toast(msg);}
+['cf-name','cf-user'].forEach(function(id){$('#'+id).addEventListener('input',function(e){e.target.removeAttribute('aria-invalid');});});
+$('#cf').addEventListener('submit', async function(e){e.preventDefault();
+var name=$('#cf-name').value.trim();if(!name)return bad($('#cf-name'),'Informe seu nome artístico.');
+var user=slug($('#cf-user').value||name)||'artista';var base=user,n=2;while($$('#grid').length&&ARTISTS.some(function(a){return a.user===user;}))user=base+(n++);
+var cats=$$('#cf-cats .on').map(function(b){return b.dataset.c;});if(!cats.length)return toast('Escolha ao menos um estilo.');
+var plans=$$('#plans .price-row').map(function(r){var p=parseInt($('.pp',r).value.replace(/\D/g,''),10);return {n:$('.pn',r).value.trim(),p:p,days:$('.pd',r).value.trim()};}).filter(function(p){return p.n&&p.p>0;}).map(function(p){return {n:p.n,d:'Pacote definido pelo artista.',p:p.p,days:/dia/.test(p.days)?p.days:(p.days||'a combinar')+(p.days?' dias':''),inc:['Arte final em alta','Revisões combinadas com o artista']};});
+if(!plans.length)return bad($('#plans .pp'),'Adicione ao menos um pacote com nome e preço.');
+var id=user+'-'+Date.now().toString(36);var wk=pend.works.length?pend.works.map(function(w){return {t:w.t||'Obra',d:'Arte enviada por '+name+'.',tech:'Portfólio · '+new Date().getFullYear(),r:w.r,src:w.src,full:w.src};}):[1,2,3,4,5,6].map(function(i){return {t:'Obra de exemplo '+i,d:'Imagem de exemplo. Envie suas artes na aba Criar Meu Perfil.',tech:'Exemplo · '+new Date().getFullYear(),r:[1.25,1,.75,1.25,1,.75][i-1],src:IMG(id+'-'+i,640,Math.round(640*[1.25,1,.75,1.25,1,.75][i-1])),full:IMG(id+'-'+i,1400,Math.round(1400*[1.25,1,.75,1.25,1,.75][i-1]))};});
+var art={id:id,isNew:true,name:name,user:user,city:$('#cf-city').value.trim(),cats:cats,tags:cats.map(function(c){return norm(c).replace(/[^a-z ]/g,'');}).concat(['novo']),bio:$('#cf-bio').value.trim(),status:$('#cf-open').checked?'open':'wait',since:new Date().getFullYear(),done:0,rating:'—',days:0,avatar:pend.avatar||IMG(id+'-avatar',320,320),banner:pend.banner||IMG(id+'-banner',1400,420),works:wk,plans:plans};
+
+toast('Publicando vitrine...');
+var { error } = await db.from('artists').insert([{
+  id: art.id, name: art.name, user: art.user, city: art.city,
+  bio: art.bio, status: art.status, cats: art.cats, tags: art.tags,
+  works: art.works, plans: art.plans, avatar: art.avatar, banner: art.banner
+}]);
+var saved = !error;
+if (error) console.error('Erro Supabase:', error);
+
+ARTISTS.unshift(art);renderGrid();
+pend={works:[],avatar:null,banner:null};drawThumbs();$('#av-prev').innerHTML='';$('#bn-prev').innerHTML='';$('#av-prev').className='imgbox';$('#bn-prev').className='imgbox';
+$('#cf').reset();$$('#cf-cats .pill').forEach(function(b,i){b.classList.toggle('on',i===0);b.setAttribute('aria-pressed',i===0);});$('#plans').innerHTML='';['Ícone / Avatar','Meio Corpo','Corpo Inteiro'].forEach(function(x){planRow(x,'','');});try{localStorage.removeItem('vritini.draft');}catch(er){}
+location.hash='artist/'+id;toast(saved?'Sua vitrine foi publicada no banco de dados!':'Erro ao salvar no banco (verifique as políticas RLS).');});
+renderGrid();route();
+})();
+</script>
+</body>
+</html>
