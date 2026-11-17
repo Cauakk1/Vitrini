@@ -324,11 +324,22 @@ select.in{padding-right:10px}
 @media (max-width:900px){.gallery{columns:2}.lbp{grid-template-columns:1fr}.lb-img{border-right:0;border-bottom:1.5px solid var(--ink)}.lb-img .imgbox{height:min(52vh,460px)}.lb-info{padding:24px}.explore-head h2{font-size:38px}.pbanner{height:200px}.stats,.spec{padding-left:8px;padding-right:8px}}
 @media (max-width:560px){.gallery{columns:1}.two{grid-template-columns:1fr}#plans .price-row{grid-template-columns:1fr 1fr}.thumbs.mini{grid-template-columns:repeat(3,1fr)}.rqp{padding:24px 20px}}
 .picker .lb{margin:0 0 8px!important}
+
+/* autenticação por e-mail e senha */
+.auth-page{max-width:520px;margin:0 auto;padding-top:72px;padding-bottom:90px}
+.auth-card{padding:34px;display:flex;flex-direction:column;gap:18px}
+.auth-card h1{font-size:42px}
+.auth-card .field{display:flex;flex-direction:column;gap:7px}
+.auth-feedback{min-height:22px;font-size:14px;color:var(--mut)}
+.auth-links{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-size:14px;color:var(--mut)}
+.auth-links button{color:var(--terra);text-decoration:underline;font-weight:600}
+@media(max-width:560px){.auth-page{padding-top:36px}.auth-card{padding:24px}.auth-card h1{font-size:34px}}
+
 </style>
 </head>
 <body>
 <div class="app-shell">
-<header class="site-header"><div class="w"><button class="brand" data-go="home" aria-label="Ir para a home"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg><span class="f">Vritini</span></button><button class="menu-toggle" id="mt" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="main-nav" id="nav"><button data-go="home">Explorar</button><button data-go="about">O Que Somos</button><button data-go="creator">Criar Meu Perfil</button><div class="nav-actions"><button class="btn s">Entrar</button><button class="btn p">Cadastrar</button></div></nav></div><div class="awn-stripe" aria-hidden="true"></div><div class="awn" aria-hidden="true"></div></header>
+<header class="site-header"><div class="w"><button class="brand" data-go="home" aria-label="Ir para a home"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg><span class="f">Vritini</span></button><button class="menu-toggle" id="mt" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="main-nav" id="nav"><button data-go="home">Explorar</button><button data-go="about">O Que Somos</button><button data-go="creator">Criar Meu Perfil</button><div class="nav-actions"><button class="btn s" type="button" data-auth-page="login">Entrar</button><button class="btn p" type="button" data-auth-page="signup">Criar conta</button><button class="btn s" type="button" id="logout-btn" hidden>Sair</button></div></nav></div><div class="awn-stripe" aria-hidden="true"></div><div class="awn" aria-hidden="true"></div></header>
 <main class="page" id="p-home"><div class="hero-wrap"><div class="tB"></div><div class="tA"></div><section class="w hero"><div><p class="eyebrow">Vitrine de artistas · comissões</p><h1>Sua arte na <em>vitrine</em> certa.</h1><p class="hero-text">Foque em criar, nós trazemos os clientes até você. Artistas montam portfólio e tabela de preços; clientes encontram o estilo exato e encomendam com facilidade e segurança.</p><div class="button-row"><button class="btn p lg" data-go="creator">Sou Artista (Criar Vitrine)</button><button class="btn s lg" data-scroll="explorar">Quero Encomendar uma Arte</button></div></div><div class="hero-art" aria-hidden="true"><div class="scene t1 arch a1" style="--sun:#FBF7F0;--hill:#C5D6B8;"><i class="ht"></i></div><div class="scene t5 arch a2" style="--sun:#FBF7F0;--hill:#CDBFE6;"><i class="ht"></i></div><div class="scene t0 arch a3" style="--sun:#4A3F5C;--hill:#C5D6B8;"><i class="ht"></i></div><div class="sunc"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="VITRINE DE ARTE"><path id="stamp-hero" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:16s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-hero" textLength="272" lengthAdjust="spacing">VITRINE DE ARTE · VITRINE DE ARTE ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg></div><p class="hand">cada traço<br>tem seu lugar ↗</p></div></section></div>
 <section class="w explore" id="explorar"><div class="explore-head"><div><p class="eyebrow">Vitrine aberta</p><h2>Explorar <em>Artistas</em></h2></div><p class="mut">Descubra talentos independentes e encontre o traço ideal para o seu projeto.</p></div>
 <div class="card search-card"><label class="search-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="q" type="search" autocomplete="off" placeholder="Busque por nome, @usuário ou tag (ex.: chibi, mascote, rpg)" aria-label="Buscar artistas por nome ou tag"></label>
@@ -338,7 +349,20 @@ select.in{padding-right:10px}
 <div class="empty" id="empty" hidden><h3>Nenhum artista encontrado</h3><p class="mut">Tente outro nome, tag ou estilo.</p><button class="btn s" id="clear" style="margin-top:16px">Limpar filtros</button></div></section></main><main class="page" id="p-about" hidden><section class="w purpose"><div><p class="eyebrow">Nosso propósito</p><h1>Onde o talento encontra <em>quem procura.</em></h1><span class="hand">menos pressão, mais arte ↓</span></div><div class="lead-copy"><p>Muitos artistas talentosos gastam horas preciosas tentando vencer algoritmos e divulgando sem parar nas redes sociais, só para conseguir clientes.</p><p>O Vritini nasceu para libertar desenhistas dessa pressão: uma vitrine inteligente e organizada, onde o portfólio e a tabela de preços trabalham por você.</p><p>Para quem contrata, é um só lugar para encontrar profissionais confiáveis e o estilo exato que procura.</p><div class="rule"></div></div></section>
 <section class="w block"><div class="block-title"><p class="eyebrow">Passo a passo</p><h2>Como <em>funciona</em></h2></div><div class="lanes"><div class="lane a"><p class="eyebrow">Artista</p><h3>Para o artista</h3><ol><li><span>1</span><h4>Crie sua vitrine</h4><p>Monte o perfil com bio, avatar e portfólio.</p></li><li><span>2</span><h4>Defina seus preços</h4><p>Cadastre tipos de desenho, valores e prazos.</p></li><li><span>3</span><h4>Receba pedidos</h4><p>Clientes encomendam direto na sua vitrine.</p></li></ol></div><div class="lane b"><p class="eyebrow">Contratante</p><h3>Para o contratante</h3><ol><li><span>1</span><h4>Explore estilos</h4><p>Busque por categoria ou palavra-chave.</p></li><li><span>2</span><h4>Escolha o artista</h4><p>Compare portfólios, preços e prazos.</p></li><li><span>3</span><h4>Encomende com segurança</h4><p>Negocie direto e acompanhe seu pedido.</p></li></ol></div></div></section>
 <section class="w block"><div class="block-title"><p class="eyebrow">Em que acreditamos</p><h2>Pilares do <em>Vritini</em></h2></div><div class="pillars"><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Visibilidade Justa</h3><p>Sua arte é encontrada pelo estilo que você cria, com destaque justo para cada artista.</p></div><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div><h3>Portfólio Profissional</h3><p>Uma vitrine organizada, com galeria, preços e prazos claros.</p></div><div class="card pillar"><div class="ibub"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div><h3>Negociação Direta</h3><p>Artista e cliente combinam os detalhes da encomenda sem intermediários.</p></div></div></section>
-<section class="w cta"><div class="cta-band tA"><h2>Sua arte merece uma <em>vitrine</em> bonita.</h2><div class="cta-actions"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="FEITO À MÃO"><path id="stamp-feito" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:20s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-feito" textLength="272" lengthAdjust="spacing">FEITO À MÃO · FEITO À MÃO ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg><button class="btn p lg" data-go="creator">Criar minha vitrine ↗</button></div></div></section></main><main class="page w creator" id="p-creator" hidden><form id="cf" novalidate><div class="creator-heading"><div><p class="eyebrow">Modo Criador</p><h1>Monte sua <em>vitrine</em></h1></div><div class="button-row" style="margin:0"><button type="button" class="btn s" id="draft">Salvar rascunho</button><button type="submit" class="btn p">Publicar vitrine</button></div></div>
+<section class="w cta"><div class="cta-band tA"><h2>Sua arte merece uma <em>vitrine</em> bonita.</h2><div class="cta-actions"><svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="FEITO À MÃO"><path id="stamp-feito" fill="none" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/><g class="sr"><g class="spin" style="animation-duration:20s"><text font-family="DM Mono" font-size="10" letter-spacing="2.6" fill="#3B3340"><textPath href="#stamp-feito" textLength="272" lengthAdjust="spacing">FEITO À MÃO · FEITO À MÃO ·</textPath></text></g></g><g transform="translate(45 42)"><svg width="30" height="36" viewBox="0 0 30 36" aria-hidden="true"><path d="M3 35V15a12 12 0 0 1 24 0v20z" fill="#CDBFE6" stroke="#3B3340" stroke-width="1.6"/><circle cx="15" cy="17" r="4.5" fill="#C5D6B8" stroke="#3B3340" stroke-width="1.6"/></svg></g></svg><button class="btn p lg" data-go="creator">Criar minha vitrine ↗</button></div></div></section></main><main class="page w auth-page" id="p-auth" hidden>
+<section class="card auth-card">
+<p class="eyebrow">Bem-vindo ao Vritini</p>
+<h1 id="auth-heading">Crie sua <em>conta</em></h1>
+<p class="mut" id="auth-intro">Cadastre-se com seu e-mail e uma senha para montar sua vitrine.</p>
+<form id="auth-form" novalidate>
+<div class="field"><label class="lb" for="auth-email">E-mail</label><input class="in" id="auth-email" type="email" autocomplete="email" required placeholder="voce@email.com"></div>
+<div class="field"><label class="lb" for="auth-password">Senha</label><input class="in" id="auth-password" type="password" autocomplete="new-password" minlength="6" required placeholder="Pelo menos 6 caracteres"></div>
+<button class="btn p full" id="auth-submit" type="submit">Criar conta</button>
+<p class="auth-feedback" id="auth-feedback" role="status" aria-live="polite"></p>
+</form>
+<p class="auth-links" id="auth-links">Já tem uma conta? <button type="button" data-auth-page="login">Entrar</button></p>
+</section></main>
+<main class="page w creator" id="p-creator" hidden><form id="cf" novalidate><div class="creator-heading"><div><p class="eyebrow">Modo Criador</p><h1>Monte sua <em>vitrine</em></h1></div><div class="button-row" style="margin:0"><button type="button" class="btn s" id="draft">Salvar rascunho</button><button type="submit" class="btn p">Publicar vitrine</button></div></div>
 <div class="creator-layout"><div class="form-stack"><div class="card form-card"><h2><em>1.</em> Seus dados</h2>
 <div><label class="lb" for="cf-name">Nome artístico</label><input class="in" id="cf-name" autocomplete="off" placeholder="Como você quer ser chamado(a)"></div>
 <div class="two"><div><label class="lb" for="cf-user">@usuário</label><input class="in" id="cf-user" autocomplete="off" placeholder="seunome"></div><div><label class="lb" for="cf-city">Cidade</label><input class="in" id="cf-city" autocomplete="off" placeholder="Ex.: Belo Horizonte, MG"></div></div>
@@ -416,6 +440,71 @@ function normalizeArtist(p){
 var SUPABASE_URL = 'https://zeodpizpejkzuonqxdr.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_qF4a6BnduP8OSGV8r-aTzw_8ZQbr02T';
 var db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var currentUser = null;
+var authReady = false;
+var authMode = 'signup';
+async function refreshAuth(){
+  var result=await db.auth.getSession();
+  currentUser=result.data&&result.data.session?result.data.session.user:null;
+  authReady=true;updateAuthButtons();route();
+}
+function updateAuthButtons(){
+  var logged=!!currentUser;
+  var login=document.querySelector('[data-auth-page="login"]');
+  var signup=document.querySelector('[data-auth-page="signup"]');
+  var logout=$('#logout-btn');
+  if(login)login.hidden=logged;
+  if(signup)signup.hidden=logged;
+  if(logout)logout.hidden=!logged;
+}
+function setAuthPage(mode){
+  authMode=mode==='login'?'login':'signup';
+  $('#auth-heading').innerHTML=authMode==='signup'?'Crie sua <em>conta</em>':'Entre na sua <em>conta</em>';
+  $('#auth-intro').textContent=authMode==='signup'?'Cadastre-se com seu e-mail e uma senha para montar sua vitrine.':'Entre com seu e-mail e senha para continuar de onde parou.';
+  $('#auth-submit').textContent=authMode==='signup'?'Criar conta':'Entrar';
+  $('#auth-password').autocomplete=authMode==='signup'?'new-password':'current-password';
+  $('#auth-feedback').textContent='';
+  $('#auth-links').innerHTML=authMode==='signup'?'Já tem uma conta? <button type="button" data-auth-page="login">Entrar</button>':'Ainda não tem conta? <button type="button" data-auth-page="signup">Criar conta</button>';
+}
+$('#auth-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var email=$('#auth-email').value.trim();
+  var password=$('#auth-password').value;
+  if(!email||!$('#auth-email').checkValidity()){ $('#auth-feedback').textContent='Digite um e-mail válido.';return; }
+  if(password.length<6){ $('#auth-feedback').textContent='A senha precisa ter pelo menos 6 caracteres.';return; }
+  var submit=$('#auth-submit');submit.disabled=true;
+  $('#auth-feedback').textContent=authMode==='signup'?'Criando sua conta...':'Entrando...';
+  try{
+    if(authMode==='signup'){
+      var result=await db.auth.signUp({email:email,password:password});
+      if(result.error)throw result.error;
+      currentUser=result.data.user;
+      if(result.data.session){
+        updateAuthButtons();toast('Conta criada! Complete seu perfil.');location.hash='creator';
+      }else{
+        $('#auth-feedback').textContent='Cadastro iniciado! Confira seu e-mail e confirme o endereço. Depois, entre para criar seu perfil.';
+      }
+    }else{
+      var result=await db.auth.signInWithPassword({email:email,password:password});
+      if(result.error)throw result.error;
+      currentUser=result.data.user;updateAuthButtons();toast('Login realizado! Vamos ao seu perfil.');location.hash='creator';
+    }
+  }catch(err){
+    console.error('Erro de autenticação Supabase:',err);
+    $('#auth-feedback').textContent=err.message||'Não foi possível concluir. Confira o e-mail e a senha.';
+  }finally{submit.disabled=false;}
+});
+db.auth.onAuthStateChange(function(_event,session){
+  currentUser=session?session.user:null;updateAuthButtons();
+  if(currentUser&&location.hash.indexOf('#auth')===0&&_event==='SIGNED_IN')location.hash='creator';
+});
+$('#logout-btn').addEventListener('click',async function(){
+  var result=await db.auth.signOut();
+  if(result.error){toast('Não foi possível sair da conta.');console.error(result.error);return;}
+  currentUser=null;updateAuthButtons();toast('Você saiu da sua conta.');location.hash='home';
+});
+refreshAuth();
+
 
 async function loadArtists() {
   /* O telefone não é buscado pela interface pública. */
@@ -485,16 +574,18 @@ document.addEventListener('keydown',function(e){if(!openM)return;if(e.key==='Esc
 else if(openM.id==='lb'&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){lb.i=(lb.i+(e.key==='ArrowRight'?1:-1)+cur.works.length)%cur.works.length;drawLB();}
 else if(e.key==='Tab'){var f=$$('button,input,select,textarea,a[href]',openM).filter(function(x){return !x.disabled&&x.offsetParent!==null;});if(!f.length)return;var first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 /* ---- Roteador ---- */
-var pages=['home','about','creator','artist'],pendingScroll=null,first=true;
+var pages=['home','about','auth','creator','artist'],pendingScroll=null,first=true;
 function show(p){pages.forEach(function(x){var el=$('#p-'+x),on=x===p;if(on){el.hidden=false;el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter');}else el.hidden=true;});
 $$('#nav>button').forEach(function(b){b.classList.toggle('on',b.dataset.go===(p==='artist'?'home':p));});$('#nav').classList.remove('open');}
 function route(){closeM();var h=location.hash.replace(/^#\/?/,'')||'home',parts=h.split('/'),p=parts[0];
-if(p==='artist'){var a=byId(decodeURIComponent(parts[1]||''));if(!a&&artistsLoading){show('home');return;}if(!a){location.replace('#home');return;}renderArtist(a);show('artist');setTab('work');}
-else{if(pages.indexOf(p)<0)p='home';show(p);document.title='Vritini — sua arte na vitrine certa';}
+if(p==='auth'){setAuthPage(parts[1]||'signup');show('auth');document.title='Entrar ou criar conta — Vritini';}
+else if(p==='artist'){var a=byId(decodeURIComponent(parts[1]||''));if(!a&&artistsLoading){show('home');return;}if(!a){location.replace('#home');return;}renderArtist(a);show('artist');setTab('work');}
+else{if(p==='creator'&&authReady&&!currentUser){location.replace('#auth/signup');return;}if(pages.indexOf(p)<0)p='home';show(p);document.title='Vritini — sua arte na vitrine certa';}
 if(pendingScroll){var t=$('#'+pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}else if(!first)window.scrollTo(0,0);first=false;}
 addEventListener('hashchange',route);
 document.addEventListener('click',function(e){var t;
-if(t=e.target.closest('[data-go]')){e.preventDefault();location.hash=t.dataset.go;return;}
+if(t=e.target.closest('[data-auth-page]')){e.preventDefault();location.hash='auth/'+t.dataset.authPage;return;}
+if(t=e.target.closest('[data-go]')){e.preventDefault();if(t.dataset.go==='creator'&&!currentUser){location.hash='auth/signup';return;}location.hash=t.dataset.go;return;}
 if(t=e.target.closest('[data-scroll]')){pendingScroll=t.dataset.scroll;if(location.hash.replace('#','')&&location.hash!=='#home'){location.hash='home';}else{var s=$('#'+pendingScroll);pendingScroll=null;s.scrollIntoView({behavior:'smooth',block:'start'});}return;}
 if(e.target.closest('[data-back]')){pendingScroll='explorar';location.hash='home';return;}
 if(t=e.target.closest('[data-tab]')){setTab(t.dataset.tab);return;}
@@ -526,6 +617,7 @@ try{var dr=JSON.parse(localStorage.getItem('vritini.draft')||'null');if(dr){$('#
 function bad(el,msg){el.setAttribute('aria-invalid','true');el.focus();toast(msg);}
 ['cf-name','cf-user'].forEach(function(id){$('#'+id).addEventListener('input',function(e){e.target.removeAttribute('aria-invalid');});});
 $('#cf').addEventListener('submit', async function(e){e.preventDefault();
+if(!currentUser){toast('Entre ou crie uma conta para publicar sua vitrine.');location.hash='auth/signup';return;}
 var name=$('#cf-name').value.trim();if(!name)return bad($('#cf-name'),'Informe seu nome artístico.');
 var phone=$('#cf-phone').value.trim();var phoneDigits=phone.replace(/\D/g,'');
 if(phoneDigits.length<10||phoneDigits.length>13)return bad($('#cf-phone'),'Informe um número de contato válido com DDD.');
@@ -538,7 +630,7 @@ var art={id:id,isNew:true,name:name,user:user,city:$('#cf-city').value.trim(),ph
 
 toast('Publicando vitrine...');
 var { error } = await db.from('artists').insert([{
-  id: art.id, name: art.name, user: art.user, city: art.city, phone: art.phone,
+  id: art.id, user_id: currentUser.id, name: art.name, user: art.user, city: art.city, phone: art.phone,
   bio: art.bio, status: art.status, cats: art.cats, tags: art.tags,
   works: art.works, plans: art.plans, avatar: art.avatar, banner: art.banner
 }]);
